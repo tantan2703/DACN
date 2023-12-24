@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 
@@ -5,11 +6,11 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Musical</title>
+    <title>Musical - Music Category Bootstrap Responsive Website Template - About Us : W3Layouts</title>
     <!-- Google fonts -->
-    <link href=//fonts.googleapis.com/css2?family=Londrina+Outline&display=swap" rel="stylesheet">
-    <!-- CSS Style link -->
-    <link rel="stylesheet" href="assets/css/style-starter.css">
+    <link href="//fonts.googleapis.com/css2?family=Londrina+Outline&display=swap" rel="stylesheet">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="{% static 'css/style-starter.css' %}">
 </head>
 
 <body>
@@ -494,101 +495,13 @@
     </script>
     <!-- //move top -->
 
+  
     <!-- common jquery plugin -->
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <!-- //common jquery plugin -->
 
-    <!-- banner slider -->
-    <script>
-        const slides = document.querySelectorAll(".slide");
-        const nextButton = document.getElementById("next");
-        const prevButton = document.getElementById("prev");
-        const auto = true;
-        const intervalTime = 5000;
-        let slideInterval;
-
-        const nextSlide = () => {
-            const current = document.querySelector(".current");
-            current.classList.remove("current");
-            if (current.nextElementSibling) {
-                current.nextElementSibling.classList.add("current");
-            } else {
-                slides[0].classList.add("current");
-            }
-        };
-
-        const prevSlide = () => {
-            const current = document.querySelector(".current");
-            current.classList.remove("current");
-            if (current.previousElementSibling) {
-                current.previousElementSibling.classList.add("current");
-            } else {
-                slides[slides.length - 1].classList.add("current");
-            }
-        };
-
-        nextButton.addEventListener("click", () => {
-            nextSlide();
-            if (auto) {
-                clearInterval(slideInterval);
-                slideInterval = setInterval(nextSlide, intervalTime);
-            }
-        });
-        prevButton.addEventListener("click", () => {
-            prevSlide();
-            if (auto) {
-                clearInterval(slideInterval);
-                slideInterval = setInterval(nextSlide, intervalTime);
-            }
-        });
-
-        if (auto) {
-            slideInterval = setInterval(nextSlide, intervalTime);
-        }
-    </script>
-    <!-- //banner slider -->
-
-    <!-- video popup -->
-    <script src="assets/js/jquery.magnific-popup.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.popup-with-zoom-anim').magnificPopup({
-                type: 'inline',
-
-                fixedContentPos: false,
-                fixedBgPos: true,
-
-                overflowY: 'auto',
-
-                closeBtnInside: true,
-                preloader: false,
-
-                midClick: true,
-                removalDelay: 300,
-                mainClass: 'my-mfp-zoom-in'
-            });
-
-            $('.popup-with-move-anim').magnificPopup({
-                type: 'inline',
-
-                fixedContentPos: false,
-                fixedBgPos: true,
-
-                overflowY: 'auto',
-
-                closeBtnInside: true,
-                preloader: false,
-
-                midClick: true,
-                removalDelay: 300,
-                mainClass: 'my-mfp-slide-bottom'
-            });
-        });
-    </script>
-    <!-- //video popup -->
-    
     <!-- theme switch js (light and dark)-->
-    <script src="assets/js/theme-change.js"></script>
+    <script src="{% static 'js/theme-change.js' %}"></script>
     <!-- //theme switch js (light and dark)-->
 
     <!-- MENU-JS -->
@@ -631,7 +544,7 @@
     <!-- //disable body scroll which navbar is in active -->
 
     <!-- bootstrap -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <!-- //bootstrap -->
     <!-- //Js scripts -->
 </body>

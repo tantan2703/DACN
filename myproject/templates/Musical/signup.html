@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Musical - Music Category Bootstrap Responsive Website Template - About Us : W3Layouts</title>
     <!-- Google fonts -->
-    <link href=//fonts.googleapis.com/css2?family=Londrina+Outline&display=swap" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css2?family=Londrina+Outline&display=swap" rel="stylesheet">
     <!-- Template CSS Style link -->
     <link rel="stylesheet" href="{% static 'css/style-starter.css' %}">
 </head>
@@ -110,25 +110,37 @@
         <div class="container py-5">
             <div class="row align-items-center">
                 <div class="col-md-6 pe-xl-5 pt-lg-4">
-                    <form action="#" method="post">
+                    <form class="px-4 px-sm-2" action="{% url 'signup' %}" method="post">
+                        {% csrf_token %}
                         <h3 class="title-style py-3">SIGN UP</h3>
-                        <div class=" row pt-3 flex-sm-row flex-column">
-                            <div class="col-sm-6">
-                                <input class="form-control my-3" type="text" id="firstName" name="firstName" placeholder="First Name" required>
+
+                        <div class="row pt-3 flex-sm-row flex-column">
+                            <div class="col-sm-6 px-sm-2 px-5">
+                                <input class="form-control my-3" type="text" id="{{ form.first_name.id_for_label }}" name="{{ form.first_name.name }}" placeholder="First Name" required>
                             </div>
-                            <div class="col-sm-6">
-                                <input class="form-control my-3" type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+                            <div class="col-sm-6 px-sm-2 px-5">
+                                <input class="form-control my-3" type="text" id="{{ form.last_name.id_for_label }}" name="{{ form.last_name.name }}" placeholder="Last Name" required>
                             </div>
                         </div>
-                        <input class="form-control my-3" type="email" id="email" name="email" placeholder="Email" required>
+                        
                         <div class="row flex-sm-row flex-column">
-                            <div class="col-sm-6">
-                                <input class="form-control my-3" type="password" id="password" name="password" placeholder="Password" required>
+                            <div class="col-sm-6 px-sm-2 px-5">
+                                <input class="form-control my-3" type="email" id="{{ form.email.id_for_label }}" name="{{ form.email.name }}" placeholder="Email" required>
                             </div>
-                            <div class="col-sm-6">
-                                <input class="form-control my-3" type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+                            <div class="col-sm-6 px-sm-2 px-5">
+                                <input class="form-control my-3" type="text" id="{{ form.username.id_for_label }}" name="{{ form.username.name }}" placeholder="Username" required>
                             </div>
-                        </div> 
+                        </div>
+                        
+                        <div class="row flex-sm-row flex-column">
+                            <div class="col-sm-6 px-sm-2 px-5">
+                                <input class="form-control my-3" type="password" id="{{ form.password1.id_for_label }}" name="{{ form.password1.name }}" placeholder="Password" required>
+                            </div>
+                            <div class="col-sm-6 px-sm-2 px-5">
+                                <input class="form-control my-3" type="password" id="{{ form.password2.id_for_label }}" name="{{ form.password2.name }}" placeholder="Confirm Password" required>
+                            </div>
+                        </div>
+                        
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="agreeTerms" required>
                             <label class="form-check-label" for="agreeTerms">
@@ -136,6 +148,17 @@
                             </label>
                         </div>                       
                         <button class="btn-style mt-5" type="submit">Sign Up</button>
+
+                        {% if messages %}
+                            <div class="mt-3">
+                                {% for message in messages %}
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
                     </form>
                 </div>
                 <div class="col-md-6 history-info mt-lg-0 mt-5 pt-md-4 pt-2">

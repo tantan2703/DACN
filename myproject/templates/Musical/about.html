@@ -1,3 +1,5 @@
+{% load static %}
+
 <!doctype html>
 <html lang="en">
 
@@ -9,7 +11,7 @@
     <!-- Google fonts -->
     <link href=//fonts.googleapis.com/css2?family=Londrina+Outline&display=swap" rel="stylesheet">
     <!-- Template CSS Style link -->
-    <link rel="stylesheet" href="assets/css/style-starter.css">
+    <link rel="stylesheet" href="{% static 'css/styletest.css' %}">
 </head>
 
 <body>
@@ -136,7 +138,7 @@
                 </div>
                 <div class="col-lg-6 history-info mt-lg-0 mt-5 pt-md-4 pt-2">
                     <div class="position-relative img-border">
-                        <img src="assets/images/about.jpg" class="img-fluid radius-image" alt="video-popup">
+                        <img src="{% static 'images/about.jpg' %}" class="img-fluid radius-image" alt="video-popup">
                     </div>
                 </div>
             </div>
@@ -164,7 +166,7 @@
                         <figure class="timeline-icon">
                         </figure>
                         <div class="dir-l radius-3">
-                            <img src="assets/images/about1.jpg" class="img-fluid radius-image" alt="">
+                            <img src="{% static 'images/about1.jpg' %}" class="img-fluid radius-image" alt="">
                         </div>
                         <div class="date-r">
                             March 2004</div>
@@ -221,7 +223,7 @@
                 <div class="col-lg-4 col-sm-6">
                     <div class="single-team">
                         <div class="img-area">
-                            <img src="assets/images/team1.jpg" class="img-fluid radius-image" alt="">
+                            <img src="{% static 'images/team1.jpg' %}" class="img-fluid radius-image" alt="">
                             <div class="social">
                                 <ul class="list-inline">
                                     <li><a href="#url"><i class="fab fa-facebook-f"></i></a></li>
@@ -239,7 +241,7 @@
                 <div class="col-lg-4 col-sm-6 mt-sm-0 mt-5">
                     <div class="single-team">
                         <div class="img-area">
-                            <img src="assets/images/team2.jpg" class="img-fluid radius-image" alt="">
+                            <img src="{% static 'images/team2.jpg' %}" class="img-fluid radius-image" alt="">
                             <div class="social">
                                 <ul class="list-inline">
                                     <li><a href="#url"><i class="fab fa-facebook-f"></i></a></li>
@@ -257,7 +259,7 @@
                 <div class="col-lg-4 col-sm-6 mt-lg-0 mt-5">
                     <div class="single-team">
                         <div class="img-area">
-                            <img src="assets/images/team4.jpg" class="img-fluid radius-image" alt="">
+                            <img src="{% static 'images/team4.jpg' %}" class="img-fluid radius-image" alt="">
                             <div class="social">
                                 <ul class="list-inline">
                                     <li><a href="#url"><i class="fab fa-facebook-f"></i></a></li>
@@ -275,7 +277,7 @@
                 <div class="col-lg-4 col-sm-6 mt-5">
                     <div class="single-team">
                         <div class="img-area">
-                            <img src="assets/images/team3.jpg" class="img-fluid radius-image" alt="">
+                            <img src="{% static 'images/team3.jpg' %}" class="img-fluid radius-image" alt="">
                             <div class="social">
                                 <ul class="list-inline">
                                     <li><a href="#url"><i class="fab fa-facebook-f"></i></a></li>
@@ -293,7 +295,7 @@
                 <div class="col-lg-4 col-sm-6 mt-5">
                     <div class="single-team">
                         <div class="img-area">
-                            <img src="assets/images/team6.jpg" class="img-fluid radius-image" alt="">
+                            <img src="{% static 'images/team6.jpg' %}" class="img-fluid radius-image" alt="">
                             <div class="social">
                                 <ul class="list-inline">
                                     <li><a href="#url"><i class="fab fa-facebook-f"></i></a></li>
@@ -311,7 +313,7 @@
                 <div class="col-lg-4 col-sm-6 mt-5">
                     <div class="single-team">
                         <div class="img-area">
-                            <img src="assets/images/team5.jpg" class="img-fluid radius-image" alt="">
+                            <img src="{% static 'images/team5.jpg' %}" class="img-fluid radius-image" alt="">
                             <div class="social">
                                 <ul class="list-inline">
                                     <li><a href="#url"><i class="fab fa-facebook-f"></i></a></li>
@@ -458,11 +460,11 @@
     <!-- //move top -->
 
     <!-- common jquery plugin -->
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <!-- //common jquery plugin -->
 
     <!-- theme switch js (light and dark)-->
-    <script src="assets/js/theme-change.js"></script>
+    <script src="{% static 'js/theme-change.js' %}"></script>
     <!-- //theme switch js (light and dark)-->
 
     <!-- MENU-JS -->
@@ -505,7 +507,7 @@
     <!-- //disable body scroll which navbar is in active -->
 
     <!-- bootstrap -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <!-- //bootstrap -->
     <!-- //Js scripts -->
 </body>
