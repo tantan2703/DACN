@@ -16,12 +16,12 @@ from bootstrap_modal_forms.generic import BSModalLoginView,BSModalCreateView
 from .forms import CustomAuthenticationForm
 from .forms import CustomUserCreationForm
 
-class SignUpView(BSModalCreateView):
-    form_class = CustomUserCreationForm
-    template_name = '/signup.html'
-    success_message = 'Success: Sign up succeeded. You can now Log in.'
-    success_url = reverse_lazy('home')
-#  Create your views here.
+# class SignUpView(BSModalCreateView):
+#     form_class = CustomUserCreationForm
+#     template_name = '/signup.html'
+#     success_message = 'Success: Sign up succeeded. You can now Log in.'
+#     success_url = reverse_lazy('home')
+# #  Create your views here.
 
 def Login(request):
     if request.user.is_authenticated: 
@@ -48,7 +48,7 @@ def login_view(request):
 def register(request):
     if request.method == "POST":
         first_name = request.POST['first_name']
-        last_name = ''
+        last_name = request.POST['last_name']
         username = request.POST['username']
         email = request.POST['email']
         password1 = request.POST['password1']
@@ -58,11 +58,11 @@ def register(request):
             # Check username
             if User.objects.filter(username = username).exists():
                 messages.error(request,username + ' ' +' already exists. Please try another username')
-                return redirect(request.META.get('HTTP_REFERER'))
+                return redirect('register')
             else:
                 if User.objects.filter(email = email).exists():
                     messages.error(request,'Email ' + ' ' + email +' ' +' already being used. Please try another email')
-                    return redirect(request.META.get('HTTP_REFERER'))
+                    return redirect('register')
                 else:
                     user = User.objects.create_user(username = username,
                     password = password1,email=email,first_name = first_name,
@@ -70,12 +70,12 @@ def register(request):
                     user.save()
                     
                     messages.success(request,  'Account was created for ' + ' ' + username+'. Please login !')
-                    return redirect(request.META.get('HTTP_REFERER'))
+                    return redirect('home')
         else:
             messages.error(request,'Password and confirm password does not match')
-            return redirect(request.META.get('HTTP_REFERER'))
+            return redirect('register')
     else:
-        return redirect(request.META.get('HTTP_REFERER'))
+        return render(request, 'accounts/register.html' )
 
 def LoginUser(request):
     if request.method == 'POST':
@@ -84,6 +84,7 @@ def LoginUser(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            return redirect('home')
             #return HttpResponseRedirect('/')
             #HttpResponseRedirect(request.path_info)
         else: 
@@ -92,7 +93,7 @@ def LoginUser(request):
     context ={
         
     }
-    return redirect(request.META.get('HTTP_REFERER'))
+    return render(request, 'accounts/login.html' )
     #return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
 
 class CustomLoginView(BSModalLoginView):

@@ -6,10 +6,8 @@ from . import views
 
 
 urlpatterns = [
-   
-    #path('login/', views.Login, name='login'a),
+
     path('login/', views.LoginUser, name='login'),
-    path('login2/', views.login_view, name='login2'),
     path('logout/',views.logoutUser,name = "logout"),
     path('register/',views.register,name = "register"), 
     path('reset_password', auth_views.PasswordResetView.as_view(),name="reset_password"),
