@@ -1,7 +1,4 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
--->
+{% load static %}
 <!doctype html>
 <html lang="en">
 
@@ -13,7 +10,7 @@ Author URL: http://w3layouts.com
     <!-- Google fonts -->
     <link href=//fonts.googleapis.com/css2?family=Londrina+Outline&display=swap" rel="stylesheet">
     <!-- Template CSS Style link -->
-    <link rel="stylesheet" href="assets/css/style-starter.css">
+    <link rel="stylesheet" href="{% static 'css/style-starter.css' %}">
 </head>
 
 <body>
@@ -76,7 +73,7 @@ Author URL: http://w3layouts.com
                             <a class="nav-link" href="about.html">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="classes.html">Classes</a>
+                            <a class="nav-link active" href="classes.html">Buy Tickets</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="contact.html">Contact</a>
@@ -112,10 +109,10 @@ Author URL: http://w3layouts.com
     <section class="inner-banner py-5">
         <div class="w3l-breadcrumb py-lg-5">
             <div class="container pt-5 pb-sm-4 pb-2">
-                <h4 class="inner-text-title font-weight-bold pt-5">Music Classes</h4>
+                <h4 class="inner-text-title font-weight-bold pt-5">Music Shows</h4>
                 <ul class="breadcrumbs-custom-path">
                     <li><a href="index.html">Home</a></li>
-                    <li class="active"><i class="fas fa-angle-right mx-2"></i>Classes</li>
+                    <li class="active"><i class="fas fa-angle-right mx-2"></i>Buy Tickets</li>
                 </ul>
             </div>
         </div>
@@ -125,25 +122,24 @@ Author URL: http://w3layouts.com
     <!-- classes section -->
     <div class="w3l-grids-block-5 classes-bg-cont py-5">
         <div class="container py-lg-5 py-md-4 py-2">
-            <h3 class="title-style text-center mb-sm-5 mb-4">Discover the Music <span>Classes</span></h3>
+            <h3 class="title-style text-center mb-sm-5 mb-4">Sắp diễn ra</h3>
             <div class="row justify-content-center">
                 <div class="col-lg-4 col-md-6">
                     <div class="blog-card-single">
                         <div class="grids5-info position-relative">
-                            <img src="assets/images/c1.jpg" alt="" class="img-fluid" />
-                            <div class="course-price-item">
-                                <h6>$199</h6>
-                            </div>
+                            <img src="{% static 'images/may.jpeg' %}" alt="" class="img-fluid" />
                         </div>
                         <div class="content-main-top">
                             <div class="content-top mb-4 mt-3">
                                 <ul class="list-unstyled d-flex align-items-center justify-content-between">
-                                    <li> <i class="fas fa-music"></i>Music</li>
-                                    <li> <i class="fas fa-calendar-alt"></i> 15 Days</li>
+                                    <li> <i class="fas fa-music"></i>Chiều nhạc trên mây</li>
+                                    <li> <i class="fas fa-calendar-alt"></i> 16/1/2024 17:00</li>
                                 </ul>
                             </div>
-                            <h4><a href="packages.html">Piano Classes</a></h4>
-                            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <h4><a href="packages.html">Phan Mạnh Quỳnh</a></h4>
+                            <p>Khách mời: Phương Anh Idol</p>
+                            <p>CN: Đà Lạt</p>
+                            <p>Giá chỉ từ 450.000 VNĐ</p>
                             <div class="top-content-border d-flex align-items-center justify-content-between mt-5 pt-4">
                                 <ul class="rating-list">
                                     <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
@@ -157,28 +153,27 @@ Author URL: http://w3layouts.com
                                     <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
                                         </a></li>
                                 </ul>
-                                <a class="btn btn-style" href="contact.html">Details</a>
+                                <a class="btn btn-style" href="{% url 'buyticket'%}">Đặt vé</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 mt-md-0 mt-4">
+                <div class="col-lg-4 col-md-6">
                     <div class="blog-card-single">
                         <div class="grids5-info position-relative">
-                            <img src="assets/images/c2.jpg" alt="" class="img-fluid" />
-                            <div class="course-price-item">
-                                <h6>$299</h6>
-                            </div>
+                            <img src="{% static 'images/may.jpeg' %}" alt="" class="img-fluid" />
                         </div>
                         <div class="content-main-top">
                             <div class="content-top mb-4 mt-3">
                                 <ul class="list-unstyled d-flex align-items-center justify-content-between">
-                                    <li> <i class="fas fa-music"></i>Music</li>
-                                    <li> <i class="fas fa-calendar-alt"></i> 15 Days</li>
+                                    <li> <i class="fas fa-music"></i>SOL 8 - LIVE STAGE </li>
+                                    <li> <i class="fas fa-calendar-alt"></i>19/1/2024 17:00</li>
                                 </ul>
                             </div>
-                            <h4><a href="packages.html">Guitar Classes</a></h4>
-                            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <h4><a href="packages.html">Lady Mây x Hippo Happy</a></h4>
+                            <p>Myra Trần - Lâm Bảo Ngọc</p>
+                            <p>CN: Hà Nội</p>
+                            <p>Giá chỉ từ 450.000 VNĐ</p>
                             <div class="top-content-border d-flex align-items-center justify-content-between mt-5 pt-4">
                                 <ul class="rating-list">
                                     <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
@@ -189,31 +184,30 @@ Author URL: http://w3layouts.com
                                         </a></li>
                                     <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
                                         </a></li>
-                                    <li><a href="#rate"><i class="fas fa-star-o" aria-hidden="true"></i>
+                                    <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
                                         </a></li>
                                 </ul>
-                                <a class="btn btn-style" href="contact.html">Details</a>
+                                <a class="btn btn-style" href="contact.html">Đặt vé</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 mt-lg-0 mt-4">
+                <div class="col-lg-4 col-md-6">
                     <div class="blog-card-single">
                         <div class="grids5-info position-relative">
-                            <img src="assets/images/c3.jpg" alt="" class="img-fluid" />
-                            <div class="course-price-item">
-                                <h6>$399</h6>
-                            </div>
+                            <img src="{% static 'images/may.jpeg' %}" alt="" class="img-fluid" />
                         </div>
                         <div class="content-main-top">
                             <div class="content-top mb-4 mt-3">
                                 <ul class="list-unstyled d-flex align-items-center justify-content-between">
-                                    <li> <i class="fas fa-music"></i>Music</li>
-                                    <li> <i class="fas fa-calendar-alt"></i> 25 Days</li>
+                                    <li> <i class="fas fa-music"></i>Chiều nhạc trên mây</li>
+                                    <li> <i class="fas fa-calendar-alt"></i> 20/1/2024 17:00</li>
                                 </ul>
                             </div>
-                            <h4><a href="packages.html">DJ Classes</a></h4>
-                            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <h4><a href="packages.html">Tăng Phúc - Nguyên Hà</a></h4>
+                            <p>Khách mời: Minh Kha</p>
+                            <p>CN: Đà Lạt</p>
+                            <p>Giá chỉ từ 450.000 VNĐ</p>
                             <div class="top-content-border d-flex align-items-center justify-content-between mt-5 pt-4">
                                 <ul class="rating-list">
                                     <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
@@ -227,28 +221,27 @@ Author URL: http://w3layouts.com
                                     <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
                                         </a></li>
                                 </ul>
-                                <a class="btn btn-style" href="contact.html">Details</a>
+                                <a class="btn btn-style" href="contact.html">Đặt vé</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 mt-md-5 mt-4">
+                <div class="col-lg-4 col-md-6">
                     <div class="blog-card-single">
                         <div class="grids5-info position-relative">
-                            <img src="assets/images/c4.jpg" alt="" class="img-fluid" />
-                            <div class="course-price-item">
-                                <h6>$199</h6>
-                            </div>
+                            <img src="{% static 'images/may.jpeg' %}" alt="" class="img-fluid" />
                         </div>
                         <div class="content-main-top">
                             <div class="content-top mb-4 mt-3">
                                 <ul class="list-unstyled d-flex align-items-center justify-content-between">
-                                    <li> <i class="fas fa-music"></i>Music</li>
-                                    <li> <i class="fas fa-calendar-alt"></i> 15 Days</li>
+                                    <li> <i class="fas fa-music"></i>SOL 8 - LIVE STAGE</li>
+                                    <li> <i class="fas fa-calendar-alt"></i> 20/1/2024 20:00</li>
                                 </ul>
                             </div>
-                            <h4><a href="packages.html">Trumpet Music</a></h4>
-                            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <h4><a href="packages.html">Lê Hiếu -  Hoàng Hải - Hà Nội</a></h4>
+                            <p>Lê Hiếu - Hoàng Hải</p>
+                            <p>CN: Hà Nội</p>
+                            <p>Giá chỉ từ 450.000 VNĐ</p>
                             <div class="top-content-border d-flex align-items-center justify-content-between mt-5 pt-4">
                                 <ul class="rating-list">
                                     <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
@@ -262,28 +255,27 @@ Author URL: http://w3layouts.com
                                     <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
                                         </a></li>
                                 </ul>
-                                <a class="btn btn-style" href="contact.html">Details</a>
+                                <a class="btn btn-style" href="contact.html">Đặt vé</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 mt-md-5 mt-4">
+                <div class="col-lg-4 col-md-6">
                     <div class="blog-card-single">
                         <div class="grids5-info position-relative">
-                            <img src="assets/images/c5.jpg" alt="" class="img-fluid" />
-                            <div class="course-price-item">
-                                <h6>$499</h6>
-                            </div>
+                            <img src="{% static 'images/may.jpeg' %}" alt="" class="img-fluid" />
                         </div>
                         <div class="content-main-top">
                             <div class="content-top mb-4 mt-3">
                                 <ul class="list-unstyled d-flex align-items-center justify-content-between">
-                                    <li> <i class="fas fa-music"></i>Music</li>
-                                    <li> <i class="fas fa-calendar-alt"></i> 25 Days</li>
+                                    <li> <i class="fas fa-music"></i>Chiều nhạc trên mây</li>
+                                    <li> <i class="fas fa-calendar-alt"></i> 20/1/2024 19:30</li>
                                 </ul>
                             </div>
-                            <h4><a href="packages.html">Music Band</a></h4>
-                            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <h4><a href="packages.html">Phương Anh - Phương Ý</a></h4>
+                            <p>Phương Anh - Phương Ý</p>
+                            <p>CN: Đà Lạt</p>
+                            <p>Giá chỉ từ 300.000 VNĐ</p>
                             <div class="top-content-border d-flex align-items-center justify-content-between mt-5 pt-4">
                                 <ul class="rating-list">
                                     <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
@@ -294,31 +286,30 @@ Author URL: http://w3layouts.com
                                         </a></li>
                                     <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
                                         </a></li>
-                                    <li><a href="#rate"><i class="fas fa-star-o" aria-hidden="true"></i>
+                                    <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
                                         </a></li>
                                 </ul>
-                                <a class="btn btn-style" href="contact.html">Details</a>
+                                <a class="btn btn-style" href="contact.html">Đặt vé</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 mt-lg-5 mt-4">
+                <div class="col-lg-4 col-md-6">
                     <div class="blog-card-single">
                         <div class="grids5-info position-relative">
-                            <img src="assets/images/c6.jpg" alt="" class="img-fluid" />
-                            <div class="course-price-item">
-                                <h6>$299</h6>
-                            </div>
+                            <img src="{% static 'images/may.jpeg' %}" alt="" class="img-fluid" />
                         </div>
                         <div class="content-main-top">
                             <div class="content-top mb-4 mt-3">
                                 <ul class="list-unstyled d-flex align-items-center justify-content-between">
-                                    <li> <i class="fas fa-music"></i>Music</li>
-                                    <li> <i class="fas fa-calendar-alt"></i> 35 Days</li>
+                                    <li> <i class="fas fa-music"></i>SOL 8 - LIVE STAGE</li>
+                                    <li> <i class="fas fa-calendar-alt"></i> 27/1/2024 20:00</li>
                                 </ul>
                             </div>
-                            <h4><a href="packages.html">Podcasts Music</a></h4>
-                            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <h4><a href="packages.html">Nguyễn Trần Trung Quân</a></h4>
+                            <p>Khách mời: Nhật Phát & Minh Su</p>
+                            <p>CN: Hà Nội</p>
+                            <p>Giá chỉ từ 450.000 VNĐ</p>
                             <div class="top-content-border d-flex align-items-center justify-content-between mt-5 pt-4">
                                 <ul class="rating-list">
                                     <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
@@ -332,7 +323,7 @@ Author URL: http://w3layouts.com
                                     <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
                                         </a></li>
                                 </ul>
-                                <a class="btn btn-style" href="contact.html">Details</a>
+                                <a class="btn btn-style" href="contact.html">Đặt vé</a>
                             </div>
                         </div>
                     </div>
@@ -495,11 +486,11 @@ Author URL: http://w3layouts.com
     <!-- //move top -->
 
     <!-- common jquery plugin -->
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <!-- //common jquery plugin -->
 
     <!-- theme switch js (light and dark)-->
-    <script src="assets/js/theme-change.js"></script>
+    <script src="{% static 'js/theme-change.js' %}"></script>
     <!-- //theme switch js (light and dark)-->
 
     <!-- MENU-JS -->
@@ -542,7 +533,7 @@ Author URL: http://w3layouts.com
     <!-- //disable body scroll which navbar is in active -->
 
     <!-- bootstrap -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <!-- //bootstrap -->
     <!-- //Js scripts -->
 </body>

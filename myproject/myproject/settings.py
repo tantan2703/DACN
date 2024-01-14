@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
+from buyticket.views import buyticket
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -39,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'home',
+    'classes',
+    'buyticket',
 ]
 
 MIDDLEWARE = [
@@ -78,9 +82,9 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'XXX',
+        'NAME': 'mydatabase',
+        'USER': 'thienan123',
+        'PASSWORD': 'thienan',
         'HOST': 'localhost',
         'PORT': '5432'
     }
@@ -135,3 +139,11 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = '20520378@gm.uit.edu.vn'
+EMAIL_HOST_PASSWORD = 'krgn awlr wtwa clsh'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSl = False
