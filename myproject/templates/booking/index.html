@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ concert.name }} - Concert Detail</title>
+    <style>
+        #seat-map {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        .seat {
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+            background-color: #ddd;
+            cursor: pointer;
+            border: 1px solid #aaa;
+        }
+
+        .seat.booked {
+            background-color: #ff6961;
+            cursor: not-allowed;
+        }
+
+        .seat.selected {
+            background-color: #4CAF50;
+        }
+
+        #booking-form {
+            display: none;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ concert.name }} - Concert Detail</h1>
+    <div id="seat-map">
+        {% for seat in seats %}
+            <div class="seat{% if seat.is_booked %} booked{% endif %}" data-seat-name="{{ seat.seat_number }}"></div>
+        {% endfor %}
+    </div>
+    <button id="book-btn">Book Selected Seats</button>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            var selectedSeats = [];
+    
+            $('.seat').on('click', function() {
+                var seatName = $(this).data('seat-name');
+                
+                if ($(this).hasClass('booked')) {
+                    alert('This seat is already booked.');
+                    return;
+                }
+    
+                $(this).toggleClass('selected');
+    
+                if ($.inArray(seatName, selectedSeats) !== -1) {
+                    // Remove deselected seat
+                    selectedSeats = selectedSeats.filter(function(name) {
+                        return name !== seatName;
+                    });
+                } else {
+                    // Add selected seat
+                    selectedSeats.push(seatName);
+                }
+    
+                // Update selected-seats in localStorage
+                localStorage.setItem('selected-seats', JSON.stringify(selectedSeats));
+            });
+    
+            $('#book-btn').on('click', function() {
+                if (selectedSeats.length === 0) {
+                    alert('Please select at least one seat.');
+                    return;
+                }
+    
+                // Redirect to contact.html
+                window.location.href = '/buyticket/';
+            });
+        });
+    </script>
+</body>
+</html>

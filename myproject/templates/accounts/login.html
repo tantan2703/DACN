@@ -9,7 +9,7 @@
     <div class="container py-5">
         <div class="row align-items-center">
             <div class="col-md-6 pe-xl-5 pt-lg-4">
-                <form class="px-4 px-sm-2" action="{% url 'login' %}" method="post">
+                <form class="px-4 px-sm-2" action="{% url 'login' %}?next={{ request.GET.next }}" method="post">
                     {% csrf_token %}
                     <h3 class="title-style py-3">LOG IN</h3>
 

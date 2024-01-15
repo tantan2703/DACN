@@ -77,6 +77,11 @@ def register(request):
     else:
         return render(request, 'accounts/register.html' )
 
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
 def LoginUser(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -84,17 +89,17 @@ def LoginUser(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
-            #return HttpResponseRedirect('/')
-            #HttpResponseRedirect(request.path_info)
+            next_url = request.GET.get('next', None)
+            if next_url:
+                return HttpResponseRedirect(next_url)
+            else:
+                return redirect('home')
         else: 
             messages.error(request, 'Username or Password is Incorrect')
             
-    context ={
-        
-    }
-    return render(request, 'accounts/login.html' )
-    #return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
+    context = {}
+    return render(request, 'accounts/login.html', context)
+
 
 class CustomLoginView(BSModalLoginView):
     authentication_form = CustomAuthenticationForm
