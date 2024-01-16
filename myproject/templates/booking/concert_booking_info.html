@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Hello{% endblock %}
+{% block content %}
+    <!-- inner banner -->
+    <section class="inner-banner py-5">
+        <div class="w3l-breadcrumb py-lg-5">
+            <div class="container pt-5 pb-sm-4 pb-2">
+                <h4 class="inner-text-title font-weight-bold pt-5">Buy tickets</h4>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active"><i class="fas fa-angle-right mx-2"></i>Buy tickets</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- //inner banner -->
+
+    <!-- contact block -->
+    <section class="w3l-contact py-5" id="contact">
+        <div class="container py-md-5 py-4">
+            <h3 class="title-style text-center mb-5">Thông tin đặt vé</h3>
+            <div class="row contact-block">
+                <div class="col-md-7 contact-right">
+                    <form action="" method="POST" class="signin-form">
+                        {% csrf_token %}
+                        <div class="input-grids">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <input type="text" name="name" id="w3lName" placeholder="Họ và Tên"
+                                        class="contact-input" required="" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="email" name="email" id="w3lSender" placeholder="Email"
+                                        class="contact-input" required="" />
+                                </div>
+                            </div>
+                            <input type="text" name="phone" id="w3lSubect" placeholder="Số điện thoại"
+                                class="contact-input" required="" />
+                            <input type="text" name="show" id="w3lWebsite" placeholder="Tên chương trình"
+                                class="contact-input" required="" />
+                            <input type="text" name="count" id="w3lCount" placeholder="Số lượng vé"
+                            class="contact-input" required="" />
+                            <input type="text" name="seat" id="selected-seats" placeholder="Các ghế đã đặt"
+                            class="contact-input" required="" />
+                        </div>
+                        <div class="form-input">
+                            <textarea name="note" id="w3lMessage" placeholder="Ghi chú tại đây"
+                                required=""></textarea>
+                        </div>
+                        <div class="text-start">
+                            <button class="btn btn-style btn-style-3">Đặt vé</button>
+                        </div>
+                    </form>
+
+                    <script>
+                    $(document).ready(function() {
+                        // Tự động điền email nếu đã đăng nhập
+                        var userEmail = "{{ user_email }}";
+                        if (userEmail) {
+                            $("#w3lSender").val(userEmail);
+                        }
+                    
+                        // Lấy giá trị selected-seats từ localStorage
+                        var concertName = "{{ concert.name }}";
+                        var selectedSeats = JSON.parse(localStorage.getItem('selected-seats')) || [];
+                    
+                        // Tự động điền tên concert và tổng số ghế đã chọn
+                        $("#w3lWebsite").val(concertName);
+                        $("#selected-seats").val(selectedSeats.join(', '));
+                    
+                        // Các xử lý sự kiện khác giữ nguyên
+                        // ...
+                    });
+                </script>
+
+                                       
+
+
+                </div>
+                <div class="col-md-5 ps-lg-5 mt-md-0 mt-5">
+                    <div class="contact-left">
+                        <div class="cont-details">
+                            <div class="d-flex contact-grid">
+                                <div class="cont-left text-center me-3">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                                <div class="cont-right">
+                                    <h6>UIT musical company</h6>
+                                    <p>Khu phố 6, P.Linh Trung, Tp.Thủ Đức, Tp.Hồ Chí Minh.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex contact-grid mt-4 pt-lg-2">
+                                <div class="cont-left text-center me-3">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div class="cont-right">
+                                    <h6>Liên hệ</h6>
+                                    <p><a href="tel:+1(21) 234 4567">+1(21) 112 7368</a></p>
+                                </div>
+                            </div>
+                            <div class="d-flex contact-grid mt-4 pt-lg-2">
+                                <div class="cont-left text-center me-3">
+                                    <i class="fas fa-envelope-open-text"></i>
+                                </div>
+                                <div class="cont-right">
+                                    <h6>Email</h6>
+                                    <p><a href="mailto:example@mail.com" class="mail">example@mail.com</a></p>
+                                </div>
+                            </div>
+                            <div class="d-flex contact-grid mt-4 pt-lg-2">
+                                <div class="cont-left text-center me-3">
+                                    <i class="fas fa-headphones-alt"></i>
+                                </div>
+                                <div class="cont-right">
+                                    <h6>Hỗ trợ khách hàng</h6>
+                                    <p><a href="mailto:info@support.com" class="mail">info@support.com</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- map -->
+    <div class="map">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.231171235212!2d106.80047917451817!3d10.870014157461519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527587e9ad5bf%3A0xafa66f9c8be3c91!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgVGjDtG5nIHRpbiAtIMSQSFFHIFRQLkhDTQ!5e0!3m2!1svi!2s!4v1705249968746!5m2!1svi!2s"
+            width="100%" height="400" frameborder="0" style="border: 0px;" allowfullscreen=""></iframe>
+    </div>
+    
+    <!-- //contact block -->
+
+{% endblock %}
