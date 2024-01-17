@@ -50,7 +50,6 @@
         }
 
         #booking-form {
-            display: none;
             max-width: 400px;
             margin: 20px auto;
         }
@@ -66,29 +65,47 @@
         {% for row in concert.rows.all %}
             <div class="row">
                 {% for seat in row.seats.all %}
-                    <div class="seat{% if seat.is_booked %} booked{% endif %}" data-seat-name="{{ seat.seat_number }}" title="{{ seat.seat_number }}"></div>
+                    <div class="seat{% if seat.is_booked %} booked{% endif %}" data-seat-name="{{ seat.seat_number }}" data-seat-price="{{ seat.seat_ticket_price }}" title="{{ seat.seat_number }}"></div>
                 {% endfor %}
             </div>
         {% endfor %}
     </div>
-    <button id="book-btn">Book Selected Seats</button>
-
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     
+    <div id="booking-form">
+        <p>Total Ticket Price: $<span id="total-ticket-price">0</span></p>
+        <button id="book-btn">Book Selected Seats</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
         $(document).ready(function() {
             var selectedSeats = [];
-    
+
+            function updateTotalTicketPrice() {
+                // Calculate total ticket price
+                var totalTicketPrice = selectedSeats.reduce(function(total, name) {
+                    return total + parseFloat($(`.seat[data-seat-name="${name}"]`).data('seat-price'));
+                }, 0);
+
+                // Display total ticket price
+                $('#total-ticket-price').text(totalTicketPrice.toFixed(2));
+
+                // Update selected-seats and total-ticket-price in localStorage
+                localStorage.setItem('selected-seats', JSON.stringify(selectedSeats));
+                localStorage.setItem('total-ticket-price', totalTicketPrice.toFixed(2));
+            }
+
             $('.seat').on('click', function() {
                 var seatName = $(this).data('seat-name');
-                
+                var seatPrice = parseFloat($(this).data('seat-price'));
+
                 if ($(this).hasClass('booked')) {
                     alert('This seat is already booked.');
                     return;
                 }
-    
+
                 $(this).toggleClass('selected');
-    
+
                 if ($.inArray(seatName, selectedSeats) !== -1) {
                     // Remove deselected seat
                     selectedSeats = selectedSeats.filter(function(name) {
@@ -98,19 +115,20 @@
                     // Add selected seat
                     selectedSeats.push(seatName);
                 }
-    
-                // Update selected-seats in localStorage
-                localStorage.setItem('selected-seats', JSON.stringify(selectedSeats));
+
+                // Update total ticket price
+                updateTotalTicketPrice();
             });
-    
+
             $('#book-btn').on('click', function() {
                 if (selectedSeats.length === 0) {
                     alert('Please select at least one seat.');
                     return;
                 }
-    
-                // Redirect to contact.html
-                window.location.href = '/concert/{{ concert.name }}/booking/';
+
+                // Redirect to the booking page with selected seats and total ticket price
+                var redirectUrl = `/concert/{{ concert.name }}/booking/?seats=${JSON.stringify(selectedSeats)}&total_price=${localStorage.getItem('total-ticket-price')}`;
+                window.location.href = redirectUrl;
             });
         });
     </script>

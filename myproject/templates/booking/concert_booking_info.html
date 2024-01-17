@@ -25,24 +25,36 @@
                     <form action="" method="POST" class="signin-form">
                         {% csrf_token %}
                         <div class="input-grids">
+                            <!-- Thêm trường họ và tên -->
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <input type="text" name="name" id="w3lName" placeholder="Họ và Tên"
+                                    <input type="text" name="first_name" id="first-name" placeholder="Họ"
                                         class="contact-input" required="" />
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="email" name="email" id="w3lSender" placeholder="Email"
+                                    <input type="text" name="last_name" id="last-name" placeholder="Tên"
                                         class="contact-input" required="" />
                                 </div>
                             </div>
-                            <input type="text" name="phone" id="w3lSubect" placeholder="Số điện thoại"
+                    
+                            <!-- Thêm trường số điện thoại -->
+                            <input type="text" name="phone" id="phone" placeholder="Số điện thoại"
                                 class="contact-input" required="" />
-                            <input type="text" name="show" id="w3lWebsite" placeholder="Tên chương trình"
-                                class="contact-input" required="" />
-                            <input type="text" name="count" id="w3lCount" placeholder="Số lượng vé"
-                            class="contact-input" required="" />
-                            <input type="text" name="seat" id="selected-seats" placeholder="Các ghế đã đặt"
-                            class="contact-input" required="" />
+                    
+                            <!-- Hiển thị thông tin email, tên concert và tổng số ghế -->
+                            <input type="text" name="user_email" id="user-email" placeholder="Email"
+                                class="contact-input" required="" value="{{ user_email }}" readonly />
+                            <input type="text" name="concert_name" id="concert-name" placeholder="Tên chương trình"
+                                class="contact-input" required="" value="{{ concert.name }}" readonly />
+                            <input type="text" name="total_seats" id="total-seats" placeholder="Tổng số ghế"
+                                class="contact-input" required="" value="{{ total_seats }}" readonly />
+                            <input type="text" name="total_price" id="total-price" placeholder="Tổng giá vé"
+                                class="contact-input" required="" value="{{ total_ticket_price }}" readonly />
+                    
+                            <!-- Thêm trường ẩn để lưu danh sách ghế đã chọn -->
+                            <input type="hidden" name="selected_seats" id="selected-seats" value="{{ selected_seats|join:', ' }}" />
+                    
+                            <!-- ... Các trường khác ... -->
                         </div>
                         <div class="form-input">
                             <textarea name="note" id="w3lMessage" placeholder="Ghi chú tại đây"
@@ -52,27 +64,10 @@
                             <button class="btn btn-style btn-style-3">Đặt vé</button>
                         </div>
                     </form>
-                    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-                    <script>
-                    $(document).ready(function() {
-                        // Tự động điền email nếu đã đăng nhập
-                        var userEmail = "{{ user_email }}";
-                        if (userEmail) {
-                            $("#w3lSender").val(userEmail);
-                        }
                     
-                        // Lấy giá trị selected-seats từ localStorage
-                        var concertName = "{{ concert.name }}";
-                        var selectedSeats = JSON.parse(localStorage.getItem('selected-seats')) || [];
                     
-                        // Tự động điền tên concert và tổng số ghế đã chọn
-                        $("#w3lWebsite").val(concertName);
-                        $("#selected-seats").val(selectedSeats.join(', '));
                     
-                        // Các xử lý sự kiện khác giữ nguyên
-                        // ...
-                    });
-                </script>
+                        
 
                                        
 
