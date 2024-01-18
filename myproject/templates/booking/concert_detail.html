@@ -88,11 +88,11 @@
                 }, 0);
 
                 // Display total ticket price
-                $('#total-ticket-price').text(totalTicketPrice.toFixed(2));
+                $('#total-ticket-price').text(totalTicketPrice.toFixed(3));
 
                 // Update selected-seats and total-ticket-price in localStorage
                 localStorage.setItem('selected-seats', JSON.stringify(selectedSeats));
-                localStorage.setItem('total-ticket-price', totalTicketPrice.toFixed(2));
+                localStorage.setItem('total-ticket-price', totalTicketPrice.toFixed(3));
             }
 
             $('.seat').on('click', function() {

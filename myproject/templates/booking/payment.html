@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <!-- Các định dạng CSS hoặc thư viện khác nếu cần -->
+</head>
+<body>
+    <h1>Payment Information</h1>
+
+    <div>
+        <p><strong>Concert Name:</strong> {{ concert_name }}</p>
+        <p><strong>Total Tickets:</strong> {{ total_tickets }}</p>
+        <p><strong>Selected Seats:</strong> {{ selected_seats|join:', ' }}</p>
+        <p><strong>Total Price:</strong> ${{ total_price }}</p>
+        <!-- Các trường thông tin thanh toán khác nếu có -->
+    </div>
+
+    <h2>QR Code</h2>
+    <img src="{{ qr_code_path }}" alt="Payment QR Code">
+
+    <p>QR Code Path: {{ qr_code_path }}</p>
+
+    <div>
+        <!-- Các trường thông tin khác hoặc nút để quay lại trang chủ nếu cần -->
+        <a href="{% url 'home' %}">Quay lại trang chủ</a>
+    </div>
+
+    <!-- Các định dạng JavaScript hoặc thư viện khác nếu cần -->
+</body>
+</html>
