@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'accounts',
     'home',
     'yourapp',
+    'booking',
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'myproject.urls'
 
