@@ -1,15 +1,20 @@
+
 from django.contrib import admin
-from .models import Concert, Seat, Row
+from .models import Concert, Row, Seat
 
 class SeatInline(admin.TabularInline):
     model = Seat
-    extra = 0  # Số lượng form trống để thêm mới
+    extra = 0
 
 class RowInline(admin.TabularInline):
     model = Row
     extra = 0
+    inlines = [SeatInline]
 
+@admin.register(Concert)
 class ConcertAdmin(admin.ModelAdmin):
-    inlines = [RowInline, SeatInline]
+    inlines = [RowInline]
 
-admin.site.register(Concert, ConcertAdmin)
+@admin.register(Row)
+class RowAdmin(admin.ModelAdmin):
+    inlines = [SeatInline]

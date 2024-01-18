@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ concert.name }} - Concert Detail</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #seat-map {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 20px auto;
+            justify-content: center;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+        }
+
+        .seat {
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+            background-color: #ddd;
+            cursor: pointer;
+            border: 1px solid #aaa;
+        }
+
+        .seat.booked {
+            background-color: #ff6961;
+            cursor: not-allowed;
+        }
+
+        .seat.selected {
+            background-color: #4CAF50;
+        }
+
+        #booking-form {
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        #book-btn {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ concert.name }} - Concert Detail</h1>
+    <div id="seat-map">
+        {% for row in concert.rows.all %}
+            <div class="row">
+                {% for seat in row.seats.all %}
+                    <div class="seat{% if seat.is_booked %} booked{% endif %}" data-seat-name="{{ seat.seat_number }}" data-seat-price="{{ seat.seat_ticket_price }}" title="{{ seat.seat_number }}"></div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    
+    <div id="booking-form">
+        <p>Total Ticket Price: $<span id="total-ticket-price">0</span></p>
+        <button id="book-btn">Book Selected Seats</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var selectedSeats = [];
+
+            function updateTotalTicketPrice() {
+                // Calculate total ticket price
+                var totalTicketPrice = selectedSeats.reduce(function(total, name) {
+                    return total + parseFloat($(`.seat[data-seat-name="${name}"]`).data('seat-price'));
+                }, 0);
+
+                // Display total ticket price
+                $('#total-ticket-price').text(totalTicketPrice.toFixed(3));
+
+                // Update selected-seats and total-ticket-price in localStorage
+                localStorage.setItem('selected-seats', JSON.stringify(selectedSeats));
+                localStorage.setItem('total-ticket-price', totalTicketPrice.toFixed(3));
+            }
+
+            $('.seat').on('click', function() {
+                var seatName = $(this).data('seat-name');
+                var seatPrice = parseFloat($(this).data('seat-price'));
+
+                if ($(this).hasClass('booked')) {
+                    alert('This seat is already booked.');
+                    return;
+                }
+
+                $(this).toggleClass('selected');
+
+                if ($.inArray(seatName, selectedSeats) !== -1) {
+                    // Remove deselected seat
+                    selectedSeats = selectedSeats.filter(function(name) {
+                        return name !== seatName;
+                    });
+                } else {
+                    // Add selected seat
+                    selectedSeats.push(seatName);
+                }
+
+                // Update total ticket price
+                updateTotalTicketPrice();
+            });
+
+            $('#book-btn').on('click', function() {
+                if (selectedSeats.length === 0) {
+                    alert('Please select at least one seat.');
+                    return;
+                }
+
+                // Redirect to the booking page with selected seats and total ticket price
+                var redirectUrl = `/concert/{{ concert.name }}/booking/?seats=${JSON.stringify(selectedSeats)}&total_price=${localStorage.getItem('total-ticket-price')}`;
+                window.location.href = redirectUrl;
+            });
+        });
+    </script>
+</body>
+</html>
