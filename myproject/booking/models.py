@@ -4,6 +4,8 @@ from django.db import models
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.db.models.signals import pre_save
+from django.contrib.auth.models import User
+
 
 class Concert(models.Model):
     name = models.CharField(max_length=255)
@@ -93,4 +95,19 @@ def delete_seat(sender, instance, **kwargs):
 
         # Cập nhật seats_per_row trực tiếp trong Row khi xóa ghế
         instance.row.update_seats_per_row()
+
+
+class Payment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    concert = models.ForeignKey(Concert, on_delete=models.CASCADE, related_name='payments')
+    total_tickets = models.IntegerField()
+    selected_seats = models.ManyToManyField(Seat)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    qr_code_path = models.CharField(max_length=255)
+    user_email = models.EmailField()
+    note = models.TextField()
+
+    def __str__(self):
+        return f"Payment for {self.concert.name} by {self.user.username}"
+
 

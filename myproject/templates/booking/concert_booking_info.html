@@ -22,7 +22,7 @@
             <h3 class="title-style text-center mb-5">Thông tin đặt vé</h3>
             <div class="row contact-block">
                 <div class="col-md-7 contact-right">
-                    <form action="" method="POST" class="signin-form">
+                    <form action="{% url 'payment' name=concert.name %}" method="POST" class="signin-form">
                         {% csrf_token %}
                         <div class="input-grids">
                             <!-- Thêm trường họ và tên -->
@@ -50,9 +50,12 @@
                                 class="contact-input" required="" value="{{ total_seats }}" readonly />
                             <input type="text" name="total_price" id="total-price" placeholder="Tổng giá vé"
                                 class="contact-input" required="" value="{{ total_ticket_price }}" readonly />
-                    
-                            <!-- Thêm trường ẩn để lưu danh sách ghế đã chọn -->
+                            
+                            <!-- Thêm trường input mới -->
+                            <input type="text" name="display_selected_seats" id="display-selected-seats" placeholder="Ghế đã chọn"
+                                class="contact-input" readonly value="{{ selected_seats|join:', ' }}" />
                             <input type="hidden" name="selected_seats" id="selected-seats" value="{{ selected_seats|join:', ' }}" />
+
                     
                             <!-- ... Các trường khác ... -->
                         </div>
