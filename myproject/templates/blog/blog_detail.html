@@ -12,8 +12,17 @@
     .sidebar-box *:last-child {
       margin-bottom: 0;
     }
+    {% comment %} button[type="submit"]{
+      margin-top:15px;
+      float:right;
+    } {% endcomment %}
+     .btn-primary {
+      margin-top:15px;
+      float:right;
+      margin-bottom: 30px;
+    }
 
-    .post-entry-sidebar ul li a,
+    .post-entry-sidebar ul li a, 
     .post-entry-footer ul li a {
       display: table;
       color: #4D4C7D;
@@ -307,6 +316,9 @@
     .like.liked {
       color: var(--primary-color);
     }
+    
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
   </style>
 <script>
   const csrf_token = "{{ csrf_token }}";
@@ -391,7 +403,7 @@
                         {{ form.errors }}
                     </div>
                 {% endif %}
-                <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea>
+                <textarea name="content" id="content" cols="1" rows="1" class="form-control"></textarea>
                 <button type="submit" class="btn btn-primary">
                   <i class="fas fa-arrow-right"></i>
                 </button>
@@ -432,7 +444,7 @@
               <div class="bio-body">
                 <h2>Hannah Anderson</h2>
                 <p class="mb-4">Chào mừng đến với trang web nhạc cụ! Tôi là Admin, người sẽ hỗ trợ bạn trong hành trình khám phá và tận hưởng âm nhạc tuyệt vời. </p>
-                <p><a href="#" class="btn btn-primary btn-sm rounded px-2 py-2">Read my bio</a></p>
+              
                 <p class="social">
                   <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
                   <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
