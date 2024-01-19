@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Profile - {{ user.username }}{% endblock %}
+{% block content %}
+<section class="w3l-about py-5 mt-5" id="profile">
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{ user.Profile.profile_pic.url }}"
+                                alt="Profile Picture" class="img-fluid rounded-circle" width="150" height="150">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title" style="color: black;">User profile</h5>
+                                <p class="card-text" style="color: black;">Username: {{ user.username }}</p>
+                                <p class="card-text" style="color: black;">Email: {{ user.email }}</p>
+                                <div class="d-flex mt-2" >
+                                    <a href="{% url 'ChangePassword' %}" class="btn btn-outline-primary me-1">Change Password</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
