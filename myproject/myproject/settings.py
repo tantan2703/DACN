@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.core.files.storage',
     'accounts',
     'home',
+    'yourapp',
     'booking',
     'blog',
 ]
