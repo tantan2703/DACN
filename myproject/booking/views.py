@@ -68,6 +68,14 @@ def payment(request, name):
             'phone': phone,
         }
 
+        # Tạo đường dẫn tới thư mục media/qr_codes
+        qr_codes_dir = getattr(settings, 'QR_CODES_DIR', 'qr_codes')
+        qr_codes_path = os.path.join(settings.MEDIA_ROOT, qr_codes_dir)
+
+        # Tạo thư mục nếu nó chưa tồn tại
+        if not os.path.exists(qr_codes_path):
+            os.makedirs(qr_codes_path)
+
         qr = qrcode.QRCode(
             version=1,
             error_correction=qrcode.constants.ERROR_CORRECT_L,
@@ -79,17 +87,12 @@ def payment(request, name):
         qr.add_data(payment_info)
         qr.make(fit=True)
 
-        qr_codes_dir = getattr(settings, 'QR_CODES_DIR', 'qr_codes')
-        qr_codes_path = os.path.join(settings.MEDIA_ROOT, qr_codes_dir)
+        # Tạo đường dẫn tới tệp QR
+        qr_filename = f'{concert_name}_payment_qr.png'
+        relative_qr_path = os.path.join(qr_codes_dir, qr_filename)
+        absolute_qr_path = os.path.join(qr_codes_path, qr_filename)
 
-        if not os.path.exists(qr_codes_path):
-            os.makedirs(qr_codes_path)
-
-        qr_path = os.path.join(qr_codes_path, f'{concert_name}_payment_qr.png')
-
-        print("QR Path:", qr_path)
-
-        qr.make_image(fill_color="black", back_color="white").save(qr_path)
+        qr.make_image(fill_color="black", back_color="white").save(absolute_qr_path)
 
         with transaction.atomic():
             payment_instance = Payment.objects.create(
@@ -97,16 +100,17 @@ def payment(request, name):
                 concert=concert,
                 total_tickets=total_tickets,
                 total_price=total_price,
-                qr_code_path=qr_path,
+                qr_file_name=qr_filename,  # Sử dụng tên tệp mà không có đường dẫn thư mục
                 user_email=user_email,
                 note=note,
             )
 
+
             selected_seats_objects = Seat.objects.filter(concert=concert, seat_number__in=selected_seats)
             payment_instance.selected_seats.set(selected_seats_objects)
-
-        context['qr_code_path'] = qr_path
-
+        relative_qr_path = relative_qr_path.replace('\\', '/')
+        context['qr_code_path'] = relative_qr_path
+        print("Relative QR Path:", relative_qr_path)
         return render(request, 'booking/payment.html', context)
     else:
         messages.warning(request, 'Invalid request method.')

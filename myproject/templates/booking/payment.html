@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,10 +19,8 @@
     </div>
 
     <h2>QR Code</h2>
-    <img src="{{ qr_code_path }}" alt="Payment QR Code">
-
-    <p>QR Code Path: {{ qr_code_path }}</p>
-
+    <!-- Trong file payment.html -->
+    <img src="{% get_media_prefix %}{{ qr_code_path }}" alt="QR Code">
     <div>
         <!-- Các trường thông tin khác hoặc nút để quay lại trang chủ nếu cần -->
         <a href="{% url 'home' %}">Quay lại trang chủ</a>
