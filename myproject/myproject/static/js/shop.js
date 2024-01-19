@@ -1,146 +1,81 @@
-let listProductHTML = document.querySelector('.listProduct');
-let listCartHTML = document.querySelector('.listCart');
-let iconCart = document.querySelector('.icon-cart');
-let iconCartSpan = document.querySelector('.icon-cart span');
-let body = document.querySelector('body');
-let closeCart = document.querySelector('.close');
-let products = [];
-let cart = [];
-
-
-iconCart.addEventListener('click', () => {
-    body.classList.toggle('showCart');
-})
-closeCart.addEventListener('click', () => {
-    body.classList.toggle('showCart');
-})
-
-const addDataToHTML = () => {
-    // remove datas default from HTML
-
-    // add new datas
-    if (products.length > 0) // if has data
+const product = [
     {
-        products.forEach(product => {
-            let newProduct = document.createElement('div');
-            newProduct.dataset.id = product.id;
-            newProduct.classList.add('item');
-            newProduct.innerHTML =
-                `<img src="${product.image}" alt="">
-                <h2>${product.name}</h2>
-                <div class="price">$${product.price}</div>
-                <button class="addCart">Add To Cart</button>`;
-            listProductHTML.appendChild(newProduct);
-        });
+        id: 0,
+        image: 'image/gg-1.jpg',
+        title: 'Z Flip Foldable Mobile',
+        price: 120,
+    },
+    {
+        id: 1,
+        image: 'image/hh-2.jpg',
+        title: 'Air Pods Pro',
+        price: 60,
+    },
+    {
+        id: 2,
+        image: 'image/ee-3.jpg',
+        title: '250D DSLR Camera',
+        price: 230,
+    },
+    {
+        id: 3,
+        image: 'image/aa-1.jpg',
+        title: 'Head Phones',
+        price: 100,
     }
-}
-listProductHTML.addEventListener('click', (event) => {
-    let positionClick = event.target;
-    if (positionClick.classList.contains('addCart')) {
-        let id_product = positionClick.parentElement.dataset.id;
-        addToCart(id_product);
-    }
-})
-const addToCart = (product_id) => {
-    let positionThisProductInCart = cart.findIndex((value) => value.product_id == product_id);
-    if (cart.length <= 0) {
-        cart = [{
-            product_id: product_id,
-            quantity: 1
-        }];
-    } else if (positionThisProductInCart < 0) {
-        cart.push({
-            product_id: product_id,
-            quantity: 1
-        });
-    } else {
-        cart[positionThisProductInCart].quantity = cart[positionThisProductInCart].quantity + 1;
-    }
-    addCartToHTML();
-    addCartToMemory();
-}
-const addCartToMemory = () => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-}
-const addCartToHTML = () => {
-    listCartHTML.innerHTML = '';
-    let totalQuantity = 0;
-    if (cart.length > 0) {
-        cart.forEach(item => {
-            totalQuantity = totalQuantity + item.quantity;
-            let newItem = document.createElement('div');
-            newItem.classList.add('item');
-            newItem.dataset.id = item.product_id;
+];
+const categories = [...new Set(product.map((item) => { return item }))]
+let i = 0;
+document.getElementById('root').innerHTML = categories.map((item) => {
+    var { image, title, price } = item;
+    return (
+        `<div class='box'>
+            <div class='img-box'>
+                <img class='images' src=${image}></img>
+            </div>
+        <div class='bottom'>
+        <p>${title}</p>
+        <h2>$ ${price}.00</h2>` +
+        "<button onclick='addtocart(" + (i++) + ")'>Add to cart</button>" +
+        `</div>
+        </div>`
+    )
+}).join('')
 
-            let positionProduct = products.findIndex((value) => value.id == item.product_id);
-            let info = products[positionProduct];
-            listCartHTML.appendChild(newItem);
-            newItem.innerHTML = `
-            <div class="image">
-                    <img src="${info.image}">
+var cart = [];
+
+function addtocart(a) {
+    cart.push({ ...categories[a] });
+    displaycart();
+}
+function delElement(a) {
+    cart.splice(a, 1);
+    displaycart();
+}
+
+function displaycart() {
+    let j = 0, total = 0;
+    document.getElementById("count").innerHTML = cart.length;
+    if (cart.length == 0) {
+        document.getElementById('cartItem').innerHTML = "Your cart is empty";
+        document.getElementById("total").innerHTML = "$ " + 0 + ".00";
+    }
+    else {
+        document.getElementById("cartItem").innerHTML = cart.map((items) => {
+            var { image, title, price } = items;
+            total = total + price;
+            document.getElementById("total").innerHTML = "$ " + total + ".00";
+            return (
+                `<div class='cart-item'>
+                <div class='row-img'>
+                    <img class='rowimg' src=${image}>
                 </div>
-                <div class="name">
-                ${info.name}
-                </div>
-                <div class="totalPrice">$${info.price * item.quantity}</div>
-                <div class="quantity">
-                    <span class="minus"><</span>
-                    <span>${item.quantity}</span>
-                    <span class="plus">></span>
-                </div>
-            `;
-        })
+                <p style='font-size:12px;'>${title}</p>
+                <h2 style='font-size: 15px;'>$ ${price}.00</h2>` +
+                "<i class='fa-solid fa-trash' onclick='delElement(" + (j++) + ")'></i></div>"
+            );
+        }).join('');
     }
-    iconCartSpan.innerText = totalQuantity;
+
+
 }
-
-listCartHTML.addEventListener('click', (event) => {
-    let positionClick = event.target;
-    if (positionClick.classList.contains('minus') || positionClick.classList.contains('plus')) {
-        let product_id = positionClick.parentElement.parentElement.dataset.id;
-        let type = 'minus';
-        if (positionClick.classList.contains('plus')) {
-            type = 'plus';
-        }
-        changeQuantityCart(product_id, type);
-    }
-})
-const changeQuantityCart = (product_id, type) => {
-    let positionItemInCart = cart.findIndex((value) => value.product_id == product_id);
-    if (positionItemInCart >= 0) {
-        let info = cart[positionItemInCart];
-        switch (type) {
-            case 'plus':
-                cart[positionItemInCart].quantity = cart[positionItemInCart].quantity + 1;
-                break;
-
-            default:
-                let changeQuantity = cart[positionItemInCart].quantity - 1;
-                if (changeQuantity > 0) {
-                    cart[positionItemInCart].quantity = changeQuantity;
-                } else {
-                    cart.splice(positionItemInCart, 1);
-                }
-                break;
-        }
-    }
-    addCartToHTML();
-    addCartToMemory();
-}
-
-const initApp = () => {
-    // get data product
-    fetch('products.json')
-        .then(response => response.json())
-        .then(data => {
-            products = data;
-            addDataToHTML();
-
-            // get data cart from memory
-            if (localStorage.getItem('cart')) {
-                cart = JSON.parse(localStorage.getItem('cart'));
-                addCartToHTML();
-            }
-        })
-}
-initApp();

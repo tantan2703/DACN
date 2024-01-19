@@ -3,7 +3,7 @@ body {
     font-family: Poppins;
 }
 
-.container {
+.container-shop {
     width: 900px;
     margin: auto;
     max-width: 90vw;
@@ -16,7 +16,7 @@ svg {
     width: 30px;
 }
 
-header {
+.header-cart {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -109,7 +109,7 @@ body.showCart .container {
     font-weight: 300;
 }
 
-.cartTab .btn {
+.cartTab .btn-shop {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 }
