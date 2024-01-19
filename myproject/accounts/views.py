@@ -203,5 +203,16 @@ def profile_setting(request):
     }
     return render(request,'accounts/profile_setting.html',context)
 
-
+#Change_Password
+def Change_Password(request):
+    if request.method == "POST":
+         fm=PasswordChangeForm(user=request.user,data=request.POST)
+         if fm.is_valid():
+            fm.save()
+            update_session_auth_hash(request,fm.user)
+            messages.success(request,'Your password has been changed succesfully.....')
+            return redirect('home')
+    else:
+        fm=PasswordChangeForm(user=request.user)
+    return render (request,'accounts/Change_Password.html',{'fm':fm})
 
