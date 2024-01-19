@@ -30,3 +30,17 @@ class CustomAuthenticationForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ['username', 'password']
+
+class UserUpdateForm(forms.ModelForm):
+     email = forms.EmailField()
+
+     class Meta:
+          model = User
+          fields = ['username','email']
+
+class ProfileUpdateForm(forms.ModelForm):
+     email = forms.EmailField()
+
+     class Meta:
+          model = Profile
+          fields = ['profile_pic']

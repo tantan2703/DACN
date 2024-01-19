@@ -24,6 +24,34 @@
                         </div>
                     </div>
                 </div>
+                <div class="card mb-3" style="color: black">
+                    <form method="POST" enctype="multipart/form-data" class="p-4">
+                        {% csrf_token %}
+                        <fieldset class="form-group border-bottom mb-4">
+                            <legend>Profile Info</legend>
+                
+                            <div class="mb-3">
+                                <label for="id_username" class="form-label">Username:</label>
+                                <input type="text" name="username" maxlength="150" required class="form-control" id="id_username">
+                                <div class="form-text">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</div>
+                            </div>
+                
+                            <div class="mb-3">
+                                <label for="id_email" class="form-label">Email:</label>
+                                <input type="email" name="email" maxlength="320" required class="form-control" id="id_email">
+                            </div>
+                
+                            <div class="mb-3">
+                                <label for="id_profile_pic" class="form-label">Profile pic:</label>
+                                <input type="file" name="profile_pic" accept="image/*" class="form-control" id="id_profile_pic">
+                            </div>
+                        </fieldset>
+                
+                        <div class="form-group">
+                            <button class="btn btn-outline-info" type="submit">Update</button>
+                        </div>
+                    </form>
+                </div>                
             </div>
         </div>
     </div>
