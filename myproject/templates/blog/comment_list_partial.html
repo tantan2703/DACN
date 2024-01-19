@@ -1,0 +1,22 @@
+{# blog/comment_list_partial.html #}
+
+             
+{% for comment in comments %}
+        <li class="comment">
+            <div class="vcard">
+                <img src="/assets/images/person_1.jpg" alt="Image placeholder">
+            </div>
+            <div class="comment-body">
+                <h3>{{ comment.author.username }}</h3>
+                <div class="meta">{{ comment.created_at }}</div>
+                <p>{{ comment.content }}</p>
+                <p>
+                    <a href="#" class="like rounded {% if user in comment.likes.all %}liked{% endif %}"
+                        onclick="toggleLike('{{ post.title }}', {{ comment.id }}, event)">
+                        <i class="fas fa-heart"></i> 
+                        <span id="likeCount{{ comment.id }}">{{ comment.likes.count }}</span>
+                    </a>
+                </p>
+            </div>
+        </li>
+{% endfor %}

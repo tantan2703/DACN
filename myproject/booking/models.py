@@ -103,7 +103,7 @@ class Payment(models.Model):
     total_tickets = models.IntegerField()
     selected_seats = models.ManyToManyField(Seat)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
-    qr_code_path = models.CharField(max_length=255)
+    qr_file_name = models.CharField(max_length=255)
     user_email = models.EmailField()
     note = models.TextField()
 

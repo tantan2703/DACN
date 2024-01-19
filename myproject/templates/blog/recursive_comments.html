@@ -1,0 +1,29 @@
+<!-- recursive_comments.html -->
+<ul class="comment-list">
+    {% for child_comment in comments %}
+        <li class="comment" data-comment-id="{{ child_comment.id }}">
+            <div class="vcard">
+                <img src="/assets/images/person_1.jpg" alt="Image placeholder">
+            </div>
+            <div class="comment-body">
+                <h3>{{ child_comment.author.username }}</h3>
+                <div class="meta">{{ child_comment.created_at }}</div>
+                <p>{{ child_comment.content }}</p>
+                <p><a href="#" class="reply rounded" onclick="toggleReplyForm({{ child_comment.id }})">Reply</a></p>
+                <!-- Form reply for child comment -->
+                <div id="replyForm{{ child_comment.id }}" style="display: none; margin-left: 20px;">
+                    <form method="post" action="{% url 'blog_detail' post_title=post.title %}" class="p-5 bg-light">
+                        {% csrf_token %}
+                        <input type="hidden" name="parent_comment_id" value="{{ child_comment.id }}">
+                        <textarea name="content" id="content{{ child_comment.id }}" cols="30" rows="5" class="form-control"></textarea>
+                        <input type="submit" value="Post Reply" class="btn btn-primary">
+                    </form>
+                </div>
+                <!-- Recursive call for nested comments -->
+                {% if child_comment.children.count > 0 %}
+                    {% include 'recursive_comments.html' with comments=child_comment.children.all %}
+                {% endif %}
+            </div>
+        </li>
+    {% endfor %}
+</ul>

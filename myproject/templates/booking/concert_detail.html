@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Hello{% endblock %}
+{% block content %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ concert.name }} - Concert Detail</title>
-    <style>
+     {% comment %} <style>
         body {
             display: flex;
             flex-direction: column;
@@ -57,10 +59,298 @@
         #book-btn {
             margin-top: 10px;
         }
-    </style>
+        .container
+        {
+            margin-top: 20px;
+        }
+    </style> {% endcomment %} 
+
+
+    {% comment %} <style>
+        @import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
+    
+        * {
+          box-sizing: border-box;
+        }
+    
+        body {
+          background-color: #242333;
+          color: #fff;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          font-family: "Lato", sans-serif;
+          margin: 0;
+        }
+    
+        .movie-container {
+          margin: 20px 0;
+        }
+    
+        .movie-container select {
+          background-color: #fff;
+          border: 0;
+          border-radius: 5px;
+          font-size: 16px;
+          margin-left: 10px;
+          padding: 5px 15px 5px 15px;
+          -moz-appearance: none;
+          -webkit-appearance: none;
+          appearance: none;
+        }
+    
+        .container {
+          perspective: 1000px;
+          margin-bottom: 30px;
+        }
+    
+        .seat {
+          background-color: #444451;
+          height: 15px;
+          width: 15px;
+          margin: 3px;
+          font-size: 50px;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+    
+        .seat.selected {
+          background-color: red;
+        }
+    
+        .seat.sold {
+          background-color: #000;
+        }
+    
+        .seat:nth-of-type(8) {
+          margin-right: 18px;
+        }
+    
+        .seat:nth-last-of-type(8) {
+          margin-left: 18px;
+        }
+    
+        .seat:not(.sold):hover {
+          cursor: pointer;
+          transform: scale(1.2);
+        }
+    
+        .showcase .seat:not(.sold):hover {
+          cursor: default;
+          transform: scale(1);
+        }
+    
+        .showcase {
+          background: rgba(0, 0, 0, 0.1);
+          padding: 5px 10px;
+          border-radius: 5px;
+          color: #777;
+          list-style-type: none;
+          display: flex;
+          justify-content: space-between;
+        }
+    
+        .showcase li {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 10px;
+        }
+    
+        .showcase li small {
+          margin-left: 2px;
+        }
+    
+        .row {
+          display: flex;
+        }
+    
+        .expensive {
+          background-color: #FFC5C5;
+          ;
+        }
+    
+        .middle {
+          background-color: #43766C;
+        }
+    
+        .cheap {
+          background-color: #FFCF96;
+        }
+    
+        /* .screen {
+          background-color: #fff;
+          height: 120px;
+          width: 100%;
+          margin: 15px 0;
+          transform: rotateX(-48deg);
+          box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+        } */
+        .screen {
+    
+          background-color: #A9A9A9;
+          height: 30px;
+          width: 100%;
+          margin: 15px 0;
+          transform: rotateX(-48deg);
+          box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+        }
+    
+        p.text {
+          margin: 5px 0;
+        }
+    
+        p.text span {
+          color: rgb(158, 248, 158);
+        }
+      </style> {% endcomment %}
+      <style>
+        * {
+            box-sizing: border-box;
+        }
+    
+       :root {
+        --seat-color: #444451;
+
+       }
+       [data-theme="dark"] {
+        --seat-color: #fff;
+       }
+
+
+        body {
+
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+          
+            justify-content: center;
+            font-family: "Lato", sans-serif;
+            margin: 0;
+        }
+        h1 {
+           text-align:center;
+        }
+      
+         .movie-container { 
+            margin-top: 200px ;
+            margin-bottom: 20px;}
+   
+       .seat {
+            background-color: var(--seat-color);
+            margin-right: 500px;
+            margin-left: 500px;
+            height: 15px;
+            width: 15px;
+            margin: 3px;
+            font-size: 50px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+          }  
+        {% comment %} .seat {
+            background-color: #444451;
+            height: 15px;
+            width: 15px;
+            margin: 3px;
+            font-size: 50px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        } {% endcomment %}
+        .showcase {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 5px 20px;
+            margin-right:500px;
+            margin-left:500px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            color: #777;
+            list-style-type: none;
+            display: flex;
+            justify-content: space-between;
+        }
+        .showcase li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+          }
+       
+        
+        #seat-map {
+            display:flex;
+            perspective: 1000px;
+            margin-bottom: 30px;
+        }
+        
+       
+        
+        .screen {
+            margin-right: 400px;
+            margin-left: 400px;
+            margin-bottom: 20px;
+            display:flex;
+
+            background-color: #f50537;
+            height: 30px;
+            margin-top: 15px ;
+            transform: rotateX(-48deg);
+            box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+          } 
+        #booking-form {
+            margin-top: 100px;
+            margin-left: 1000px;
+            margin-bottom: 100px;
+        }
+        #book-btn {
+            width: 120px;
+            height: 40px;
+            background-color: #f50537;
+            color: white;
+            border: none;
+            margin-top: 10px;
+            border-radius: 30px;
+           
+        }
+       
+      </style>
+    
 </head>
 <body>
-    <h1>{{ concert.name }} - Concert Detail</h1>
+ 
+    {% comment %} <h1>{{ concert.name }} - Concert Detail</h1> {% endcomment %}
+    <div class="movie-container">
+        <h1>Concert {{ concert.name }} </h1> 
+        
+      </div>
+      <ul class="showcase">
+        <li>
+          <div class="seat cheap"></div>
+          <small>50$</small>
+        </li>
+        <li>
+          <div class="seat middle"></div>
+          <small>100$</small>
+        </li>
+        <li>
+          <div class="seat expensive"></div>
+          <small>150$</small>
+        </li>
+        <li>
+          <div class="seat selected"></div>
+          <small>Selected</small>
+        </li>
+        <li>
+          <div class="seat sold"></div>
+          <small>Sold</small>
+        </li>
+      </ul>
+   
+      
+
+     
+    <div class = "screen"></div>
     <div id="seat-map">
         {% for row in concert.rows.all %}
             <div class="row">
@@ -70,11 +360,14 @@
             </div>
         {% endfor %}
     </div>
+   
     
     <div id="booking-form">
         <p>Total Ticket Price: $<span id="total-ticket-price">0</span></p>
-        <button id="book-btn">Book Selected Seats</button>
+        <button id="book-btn">Book</button>
     </div>
+
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
@@ -134,3 +427,4 @@
     </script>
 </body>
 </html>
+{% endblock %}
