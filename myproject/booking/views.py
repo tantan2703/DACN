@@ -8,6 +8,7 @@ from django.conf import settings
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Concert, Seat, Payment
+<<<<<<< HEAD
 import json
 import uuid
 import requests
@@ -17,6 +18,20 @@ import hashlib
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
+=======
+from django.core.paginator import Paginator
+
+def concert_list(request):
+    concerts=Concert.objects.all()
+    paginator = Paginator(concerts,6)
+    page = request.GET.get('page')
+    paged_listings = paginator.get_page(page)
+    context={
+        'concerts':paged_listings,
+       
+    }
+    return render(request, "booking/concert.html",context)
+>>>>>>> 8f110ddfd33ee64f22bc5c9e80c98a78fbcd5cef
 
 @login_required
 def concert_detail(request, name):
