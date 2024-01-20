@@ -70,6 +70,7 @@ def update_cart_item_quantity(request, item_id):
             cart_item.quantity -= 1
             cart_item.save()
         elif cart_item.quantity == 1:
+            cart_item.quantity -= 1
             # Nếu giảm xuống 0, xóa sản phẩm khỏi giỏ hàng
             cart_item.delete()
 

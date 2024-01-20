@@ -2,354 +2,125 @@
 {% load static %}
 {% block title %}Hello{% endblock %}
 {% block content %}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ concert.name }} - Concert Detail</title>
-     {% comment %} <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
+<style>
 
-        h1 {
-            text-align: center;
-        }
+h1.booking {
+    font-size: 24px; /* Kích thước chữ */
+    padding-top: 50px; /* Padding top */
+    padding-left: 50px;
+}
 
-        #seat-map {
-            display: flex;
-            flex-wrap: wrap;
-            max-width: 800px;
-            margin: 20px auto;
-            justify-content: center;
-        }
+#seat-map {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 20px auto;
+    justify-content: center;
+}
 
-        .row {
-            display: flex;
-            align-items: center;
-        }
+.row {
+    display: flex;
+    align-items: center;
+}
 
-        .seat {
-            width: 30px;
-            height: 30px;
-            margin: 5px;
-            background-color: #ddd;
-            cursor: pointer;
-            border: 1px solid #aaa;
-        }
+.seat {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    background-color: #ddd;
+    cursor: pointer;
+    border: 1px solid #aaa;
+    position: relative;
+    border-radius: 5px; /* Bo tròn góc */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        .seat.booked {
-            background-color: #ff6961;
-            cursor: not-allowed;
-        }
+.seat.booked {
+    background-color: #ff6961;
+    cursor: not-allowed;
+}
 
-        .seat.selected {
-            background-color: #4CAF50;
-        }
+.seat.selected {
+    background-color: #4CAF50;
+}
 
-        #booking-form {
-            max-width: 400px;
-            margin: 20px auto;
-        }
+.seat i {
+    color: #555; /* Màu của biểu tượng */
+}
 
-        #book-btn {
-            margin-top: 10px;
-        }
-        .container
-        {
-            margin-top: 20px;
-        }
-    </style> {% endcomment %} 
+/* Đổ bóng từ trong ra ngoài */
+.seat::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.3), transparent 70%);
+    border-radius: 5px; /* Bo tròn góc */
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.3s ease-in-out;
+}
 
-
-    {% comment %} <style>
-        @import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
-    
-        * {
-          box-sizing: border-box;
-        }
-    
-        body {
-          background-color: #242333;
-          color: #fff;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          height: 100vh;
-          font-family: "Lato", sans-serif;
-          margin: 0;
-        }
-    
-        .movie-container {
-          margin: 20px 0;
-        }
-    
-        .movie-container select {
-          background-color: #fff;
-          border: 0;
-          border-radius: 5px;
-          font-size: 16px;
-          margin-left: 10px;
-          padding: 5px 15px 5px 15px;
-          -moz-appearance: none;
-          -webkit-appearance: none;
-          appearance: none;
-        }
-    
-        .container {
-          perspective: 1000px;
-          margin-bottom: 30px;
-        }
-    
-        .seat {
-          background-color: #444451;
-          height: 15px;
-          width: 15px;
-          margin: 3px;
-          font-size: 50px;
-          border-top-left-radius: 10px;
-          border-top-right-radius: 10px;
-        }
-    
-        .seat.selected {
-          background-color: red;
-        }
-    
-        .seat.sold {
-          background-color: #000;
-        }
-    
-        .seat:nth-of-type(8) {
-          margin-right: 18px;
-        }
-    
-        .seat:nth-last-of-type(8) {
-          margin-left: 18px;
-        }
-    
-        .seat:not(.sold):hover {
-          cursor: pointer;
-          transform: scale(1.2);
-        }
-    
-        .showcase .seat:not(.sold):hover {
-          cursor: default;
-          transform: scale(1);
-        }
-    
-        .showcase {
-          background: rgba(0, 0, 0, 0.1);
-          padding: 5px 10px;
-          border-radius: 5px;
-          color: #777;
-          list-style-type: none;
-          display: flex;
-          justify-content: space-between;
-        }
-    
-        .showcase li {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 0 10px;
-        }
-    
-        .showcase li small {
-          margin-left: 2px;
-        }
-    
-        .row {
-          display: flex;
-        }
-    
-        .expensive {
-          background-color: #FFC5C5;
-          ;
-        }
-    
-        .middle {
-          background-color: #43766C;
-        }
-    
-        .cheap {
-          background-color: #FFCF96;
-        }
-    
-        /* .screen {
-          background-color: #fff;
-          height: 120px;
-          width: 100%;
-          margin: 15px 0;
-          transform: rotateX(-48deg);
-          box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
-        } */
-        .screen {
-    
-          background-color: #A9A9A9;
-          height: 30px;
-          width: 100%;
-          margin: 15px 0;
-          transform: rotateX(-48deg);
-          box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
-        }
-    
-        p.text {
-          margin: 5px 0;
-        }
-    
-        p.text span {
-          color: rgb(158, 248, 158);
-        }
-      </style> {% endcomment %}
-      <style>
-        * {
-            box-sizing: border-box;
-        }
-    
-       :root {
-        --seat-color: #444451;
-
-       }
-       [data-theme="dark"] {
-        --seat-color: #fff;
-       }
+/* Hiệu ứng khi hover hoặc selected */
+.seat:hover::after,
+.seat.selected::after {
+    transform: translate(-50%, -50%) scale(1);
+}
 
 
-        body {
+/* Thêm kiểu cho màn hình và biểu mẫu đặt vé */
+.screen {
+    width: 600px;
+    margin: 0 auto 20px;
+    height: 30px;
+    background: radial-gradient(circle, #f50537, transparent 80%); /* Chuyển màu từ đỏ tới trong cùng, trong suốt từ 80% về sau */
+    border-radius: 15px; /* Bo tròn góc */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); /* Đổ bóng */
+}
 
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-          
-            justify-content: center;
-            font-family: "Lato", sans-serif;
-            margin: 0;
-        }
-        h1 {
-           text-align:center;
-        }
-      
-         .movie-container { 
-            margin-top: 200px ;
-            margin-bottom: 20px;}
-   
-       .seat {
-            background-color: var(--seat-color);
-            margin-right: 500px;
-            margin-left: 500px;
-            height: 15px;
-            width: 15px;
-            margin: 3px;
-            font-size: 50px;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-          }  
-        {% comment %} .seat {
-            background-color: #444451;
-            height: 15px;
-            width: 15px;
-            margin: 3px;
-            font-size: 50px;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-        } {% endcomment %}
-        .showcase {
-            background: rgba(0, 0, 0, 0.1);
-            padding: 5px 20px;
-            margin-right:500px;
-            margin-left:500px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            color: #777;
-            list-style-type: none;
-            display: flex;
-            justify-content: space-between;
-        }
-        .showcase li {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 10px;
-          }
-       
-        
-        #seat-map {
-            display:flex;
-            perspective: 1000px;
-            margin-bottom: 30px;
-        }
-        
-       
-        
-        .screen {
-            margin-right: 400px;
-            margin-left: 400px;
-            margin-bottom: 20px;
-            display:flex;
 
-            background-color: #f50537;
-            height: 30px;
-            margin-top: 15px ;
-            transform: rotateX(-48deg);
-            box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
-          } 
-        #booking-form {
-            margin-top: 100px;
-            margin-left: 1000px;
-            margin-bottom: 100px;
-        }
-        #book-btn {
-            width: 120px;
-            height: 40px;
-            background-color: #f50537;
-            color: white;
-            border: none;
-            margin-top: 10px;
-            border-radius: 30px;
-           
-        }
-       
-      </style>
-    
-</head>
-<body>
- 
-    {% comment %} <h1>{{ concert.name }} - Concert Detail</h1> {% endcomment %}
-    <div class="movie-container">
-        <h1>Concert {{ concert.name }} </h1> 
-        
-      </div>
-      <ul class="showcase">
-        <li>
-          <div class="seat cheap"></div>
-          <small>50$</small>
-        </li>
-        <li>
-          <div class="seat middle"></div>
-          <small>100$</small>
-        </li>
-        <li>
-          <div class="seat expensive"></div>
-          <small>150$</small>
-        </li>
-        <li>
-          <div class="seat selected"></div>
-          <small>Selected</small>
-        </li>
-        <li>
-          <div class="seat sold"></div>
-          <small>Sold</small>
-        </li>
-      </ul>
-   
-      
 
-     
+#booking-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 50px;
+    margin-right: 300px;
+}
+
+#total-ticket-price {
+    font-weight: bold;
+}
+
+#book-btn {
+    width: 120px;
+    height: 40px;
+    color: white;
+    border: none;
+    margin-top: 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    background: #f50537; /* Màu gốc */
+    background-image: linear-gradient(45deg, #f50537 0%, #e40032 100%); /* Gradient màu */
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.3); /* Đổ bóng */
+    transition: transform 0.3s, box-shadow 0.3s; /* Áp dụng hiệu ứng cho transform và đổ bóng */
+}
+
+#book-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.5); /* Tăng độ đậm nhạt của đổ bóng khi hover */
+}
+
+
+
+</style>
+<section class="py-5">
+
+    <h1 class="booking"">{{ concert.name }} - Concert Detail</h1>
     <div class = "screen"></div>
     <div id="seat-map">
         {% for row in concert.rows.all %}
@@ -366,6 +137,7 @@
         <p>Total Ticket Price: $<span id="total-ticket-price">0</span></p>
         <button id="book-btn">Book</button>
     </div>
+</section>
 
 
 
@@ -425,6 +197,4 @@
             });
         });
     </script>
-</body>
-</html>
 {% endblock %}

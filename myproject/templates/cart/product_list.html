@@ -155,6 +155,7 @@
                     selectedItem.find('.totalPrice').text('$' + response.subtotal);
 
                     // Kiểm tra nếu sản phẩm đã bị xóa, thì xóa khỏi DOM
+                    console.log(response.deleted)
                     if (response.deleted) {
                         selectedItem.remove();
                     }
