@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import blog_detail, like_comment, blog_comment
-
+#kk
 urlpatterns = [
     # Các URL khác ở đây...
 
