@@ -13,6 +13,10 @@ def test(request):
     context={
     }
     return render(request,'Musical/index.html',context)
+def about(request):
+    context={
+    }
+    return render(request,'home/about.html',context)
 
 def search(request):
     queryset_list = Post.objects.all()
