@@ -1,9 +1,5 @@
 from django.urls import path
-<<<<<<< HEAD
-from .views import concert_detail, concert_booking_info, momo_payment
-=======
-from .views import concert_detail, concert_booking_info, payment, concert_list
->>>>>>> 8f110ddfd33ee64f22bc5c9e80c98a78fbcd5cef
+from .views import concert_detail, concert_booking_info, momo_payment, concert_list
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [

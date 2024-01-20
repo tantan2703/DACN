@@ -8,7 +8,6 @@ from django.conf import settings
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Concert, Seat, Payment
-<<<<<<< HEAD
 import json
 import uuid
 import requests
@@ -17,8 +16,6 @@ import hashlib
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-
-=======
 from django.core.paginator import Paginator
 
 def concert_list(request):
@@ -31,7 +28,7 @@ def concert_list(request):
        
     }
     return render(request, "booking/concert.html",context)
->>>>>>> 8f110ddfd33ee64f22bc5c9e80c98a78fbcd5cef
+
 
 @login_required
 def concert_detail(request, name):
