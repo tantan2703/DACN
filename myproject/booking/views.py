@@ -8,6 +8,18 @@ from django.conf import settings
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Concert, Seat, Payment
+from django.core.paginator import Paginator
+
+def concert_list(request):
+    concerts=Concert.objects.all()
+    paginator = Paginator(concerts,6)
+    page = request.GET.get('page')
+    paged_listings = paginator.get_page(page)
+    context={
+        'concerts':paged_listings,
+       
+    }
+    return render(request, "booking/concert.html",context)
 
 @login_required
 def concert_detail(request, name):

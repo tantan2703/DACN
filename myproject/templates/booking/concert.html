@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Shows{% endblock %}
+{% block content %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    
+    <link rel="stylesheet" href="{% static 'css/style-starter.css' %}">
+</head>
+
+<body>
+
+    <!-- inner banner -->
+    <section class="inner-banner py-5">
+        <div class="w3l-breadcrumb py-lg-5">
+            <div class="container pt-5 pb-sm-4 pb-2">
+                <h4 class="inner-text-title font-weight-bold pt-5">Music Shows</h4>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active"><i class="fas fa-angle-right mx-2"></i>Buy Tickets</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- //inner banner -->
+
+    <!-- classes section -->
+    <div class="w3l-grids-block-5 classes-bg-cont py-5">
+        <div class="container py-lg-5 py-md-4 py-2">
+            <h3 class="title-style text-center mb-sm-5 mb-4">Sắp diễn ra</h3>
+            <div class="row justify-content-center">
+
+                {% for concert in concerts %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="blog-card-single">
+                        <div class="grids5-info position-relative">
+                            <img src="{% static 'images/may.jpeg' %}" alt="" class="img-fluid" />
+                        </div>
+                        <div class="content-main-top">
+                            <div class="content-top mb-4 mt-3">
+                                <ul class="list-unstyled d-flex align-items-center justify-content-between">
+                                    <li> <i class="fas fa-music"></i>{{ concert.name }}</li>
+                                    <li> <i class="fas fa-calendar-alt"></i> 16/1/2024 17:00</li>
+                                </ul>
+                            </div>
+                            <h4><a href="packages.html">{{ concert.name }}</a></h4>
+                            
+                            <p>CN: Đà Lạt</p>
+                            <p>Giá chỉ từ 450.000 VNĐ</p>
+                            <div class="top-content-border d-flex align-items-center justify-content-between mt-5 pt-4">
+                                <ul class="rating-list">
+                                    <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                </ul>
+                                <a class="btn btn-style" href="{% url 'concert_detail' concert.name %}">Đặt vé</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- //classes section -->
+
+    <!-- pricing block -->
+    <section class="pricing-w3l py-5">
+        <div class="container py-lg-5 py-md-4 py-2">
+            <div class="row align-items-center py-2">
+                <div class="col-lg-4">
+                    <h3 class="title-style">Our <span>Pricing</span> Plan!</h3>
+                    <p class="mt-3">Aptent taciti sociosqu ad litora
+                        conubia nostra, per inceptos himenaeos. Aenean volutpat elementum ante, id eleifend eros
+                        luctus sit.</p>
+                    <a href="#prices" class="btn btn-style mt-4">See all Prices</a>
+                </div>
+                <div class="col-lg-8 ps-xl-5 mt-lg-0 mt-sm-5 mt-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="box-pricing featured">
+                                <h3 class="text-price">Standard Plan</h3>
+                                <h4>$39<span>per month</span></h4>
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Basic Techniques</li>
+                                    <li><i class="fas fa-check-circle"></i> Types of Music</li>
+                                    <li><i class="fas fa-check-circle"></i> Jazz Basics</li>
+                                    <li class="na"><span><i class="fas fa-check-circle"></i> Effective Mixing</span>
+                                    </li>
+                                </ul>
+                                <a href="#pricing" class="btn btn-style mt-4">Choose Plan</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-md-0 mt-4">
+                            <div class="box-pricing">
+                                <h3 class="text-price">Extended Plan</h3>
+                                <h4>$69<span>per month</span></h4>
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Basic Techniques</li>
+                                    <li><i class="fas fa-check-circle"></i> Types of Music</li>
+                                    <li><i class="fas fa-check-circle"></i> Jazz Basics</li>
+                                    <li><i class="fas fa-check-circle"></i> Effective Mixing</li>
+                                </ul>
+                                <a href="#pricing" class="btn btn-style mt-4">Choose Plan</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //pricing block -->
+
+
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () {
+            scrollFunction()
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("movetop").style.display = "block";
+            } else {
+                document.getElementById("movetop").style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+    <!-- //move top -->
+
+    <!-- common jquery plugin -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <!-- //common jquery plugin -->
+
+    <!-- theme switch js (light and dark)-->
+    <script src="{% static 'js/theme-change.js' %}"></script>
+    <!-- //theme switch js (light and dark)-->
+
+    <!-- MENU-JS -->
+    <script>
+        $(window).on("scroll", function () {
+            var scroll = $(window).scrollTop();
+
+            if (scroll >= 80) {
+                $("#site-header").addClass("nav-fixed");
+            } else {
+                $("#site-header").removeClass("nav-fixed");
+            }
+        });
+
+        //Main navigation Active Class Add Remove
+        $(".navbar-toggler").on("click", function () {
+            $("header").toggleClass("active");
+        });
+        $(document).on("ready", function () {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+            $(window).on("resize", function () {
+                if ($(window).width() > 991) {
+                    $("header").removeClass("active");
+                }
+            });
+        });
+    </script>
+    <!-- //MENU-JS -->
+
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+        $(function () {
+            $('.navbar-toggler').click(function () {
+                $('body').toggleClass('noscroll');
+            })
+        });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+
+    <!-- bootstrap -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- //bootstrap -->
+    <!-- //Js scripts -->
+</body>
+
+</html>
+{% endblock %}
