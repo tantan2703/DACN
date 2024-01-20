@@ -1,250 +1,314 @@
-<!-- HTML TEMPLATE FOR ALL PAGE-->
+<!-- /*
+* Bootstrap 5
+* Template Name: Furni
+* Template Author: Untree.co
+* Template URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Hello{% endblock %}
 {% block content %}
 
-<!-- inner banner -->
-<section class="inner-banner py-5">
-    <div class="w3l-breadcrumb py-lg-5">
-        <div class="container pt-5 pb-sm-4 pb-2">
-            <h4 class="inner-text-title font-weight-bold pt-5">Blog</h4>
-            <ul class="breadcrumbs-custom-path">
-                <li><a href="{% url 'home' %}" class="text-decoration-none">Home</a></li>
-                <li class="active"><i class="fas fa-angle-right mx-2"></i>Blog</li>
-            </ul>
-        </div>
-    </div>
-</section>
-<!-- //inner banner -->
 
-<section aria-label="section">
-    <div class="container">
-        <div class="row g-3">
-            
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="de-event-item">
-                    <div class="d-content">
-                        <div class="d-image">
-                            <span class="d-image-wrap"><img alt="" src="{% static 'images/about.jpg' %}" class="lazy"></span>
-                            <span class="d-date">
-                                <span class="d-mm">Nov</span>
-                                <span class="d-dd">28</span>
-                            </span>
-                        </div>
-                        <div class="d-text">
-                            <a href="01_rockfest-blog-single.html" class="text-decoration-none">
-                                <h4>Khám phá Sắc Màu Và Âm Thanh Của Nhạc Cụ</h4>
-                            </a>
-                            <p>Dolore officia sint incididunt non excepteur ea mollit commodo ut enim reprehenderit cupidatat labore ad laborum consectetur consequat...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<head>
+	
 
-            <!-- Các div và class khác bạn có thể tiếp tục cập nhật tương ứng -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="de-event-item">
-                    <div class="d-content">
-                        <div class="d-image">
-                            <span class="d-image-wrap"><img alt="" src="{% static 'images/about.jpg' %}" class="lazy"></span>
-                            <span class="d-date">
-                                <span class="d-mm">Dec</span>
-                                <span class="d-dd">01</span>
-                            </span>
-                        </div>
-                        <div class="d-text">
-                            <a href="01_rockfest-blog-single.html" class="text-decoration-none">
-                                <h4>Chỗ Cập Nhật Tiếp Theo</h4>
-                            </a>
-                            <p>Dolore officia sint incididunt non excepteur ea mollit commodo ut enim reprehenderit cupidatat labore ad laborum consectetur consequat...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+	<!-- Bootstrap CSS -->
+	<!-- <link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+		<link href="css/tiny-slider.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet"> -->
+	<!-- <link rel="stylesheet" href="css/style-starter.css"> -->
+	<title>Furni Free Bootstrap 5 Template for Furniture and Interior Design Websites by Untree.co </title>
+	<style> 
+		{% comment %} .blog-section {
+			padding: 7rem 0 12rem 0;
+		} {% endcomment %}
+		.blog-section {
+			padding-top: 7rem;
+		}
 
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="de-event-item">
-                    <div class="d-content">
-                        <div class="d-image">
-                            <span class="d-image-wrap"><img alt="" src="{% static 'images/about1.jpg' %}" class="lazy"></span>
-                            <span class="d-date">
-                                <span class="d-mm">Dec</span>
-                                <span class="d-dd">15</span>
-                            </span>
-                        </div>
-                        <div class="d-text">
-                            <a href="01_rockfest-blog-single.html" class="text-decoration-none">
-                                <h4>Latching aphagia prostatelcosis gadolinium hemikaryon aftergrief ventricumbent Swab</h4>
-                            </a>
-                            <p>Dolore officia sint incididunt non excepteur ea mollit commodo ut enim reprehenderit cupidatat labore ad laborum consectetur consequat...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+		*,
+		::after,
+		::before {
+			box-sizing: border-box;
+		}
 
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="de-event-item">
-                    <div class="d-content">
-                        <div class="d-image">
-                            <span class="d-image-wrap"><img alt="" src="{% static 'images/about1.jpg' %}" class="lazy"></span>
-                            <span class="d-date">
-                                <span class="d-mm">Jan</span>
-                                <span class="d-dd">02</span>
-                            </span>
-                        </div>
-                        <div class="d-text">
-                            <a href="01_rockfest-blog-single.html" class="text-decoration-none">
-                                <h4>Thermodynamicist aeolistic lipsanotheca nearaway Tamworth pycnid subtower</h4>
-                            </a>
-                            <p>Dolore officia sint incididunt non excepteur ea mollit commodo ut enim reprehenderit cupidatat labore ad laborum consectetur consequat...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+		body {
+			font-family: "Inter", sans-serif;
+			font-weight: 400;
+			line-height: 28px;
+			color: #6a6a6a;
+			font-size: 14px;
+			background-color: #eff2f1;
+		}
 
-            <!-- Tiếp tục cập nhật các div và class khác tương ứng -->
+		*,
+		::after,
+		::before {
+			box-sizing: border-box;
+		}
 
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="de-event-item">
-                    <div class="d-content">
-                        <div class="d-image">
-                            <span class="d-image-wrap"><img alt="" src="{% static 'images/about1.jpg' %}" class="lazy"></span>
-                            <span class="d-date">
-                                <span class="d-mm">Jan</span>
-                                <span class="d-dd">20</span>
-                            </span>
-                        </div>
-                        <div class="d-text">
-                            <a href="01_rockfest-blog-single.html" class="text-decoration-none">
-                                <h4>Unpresumptuously carnelian trochiscus echoic enmask myodynamiometer</h4>
-                            </a>
-                            <p>Dolore officia sint incididunt non excepteur ea mollit commodo ut enim reprehenderit cupidatat labore ad laborum consectetur consequat...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+		.rowblog {
+			--bs-gutter-x: 1.5rem;
+			--bs-gutter-y: 0;
+			display: flex;
+			flex-wrap: wrap;
+			margin-top: calc(-1 * var(--bs-gutter-y));
+			margin-right: calc(-.5 * var(--bs-gutter-x));
+			margin-left: calc(-.5 * var(--bs-gutter-x));
+		}
 
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="de-event-item">
-                    <div class="d-content">
-                        <div class="d-image">
-                            <span class="d-image-wrap"><img alt="" src="{% static 'images/about1.jpg' %}" class="lazy"></span>
-                            <span class="d-date">
-                                <span class="d-mm">Feb</span>
-                                <span class="d-dd">01</span>
-                            </span>
-                        </div>
-                        <div class="d-text">
-                            <a href="01_rockfest-blog-single.html" class="text-decoration-none">
-                                <h4>Statesmanese pseudhemal steatite Wendish boxhaul equiprobability xylonic</h4>
-                            </a>
-                            <p>Dolore officia sint incididunt non excepteur ea mollit commodo ut enim reprehenderit cupidatat labore ad laborum consectetur consequat...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+		.container,
+		.container-fluid,
+		.container-lg,
+		.container-md,
+		.container-sm,
+		.container-xl,
+		.container-xxl {
+			width: 100%;
+			padding-right: var(--bs-gutter-x, .75rem);
+			padding-left: var(--bs-gutter-x, .75rem);
+			margin-right: auto;
+			margin-left: auto;
+		}
 
-            <div class="spacer-single"></div>
+		.mb-5 {
+			margin-bottom: 3rem !important;
+		}
 
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
+		.rowblog>* {
+			flex-shrink: 0;
+			width: 100%;
+			max-width: 100%;
+			padding-right: calc(var(--bs-gutter-x) * .5);
+			padding-left: calc(var(--bs-gutter-x) * .5);
+			margin-top: var(--bs-gutter-y);
+		}
+
+		*,
+		::after,
+		::before {
+			box-sizing: border-box;
+		}
+
+		.blog-section .post-entry .post-thumbnail img {
+			border-radius: 20px;
+			-webkit-transition: .3s all ease;
+			-o-transition: .3s all ease;
+			transition: .3s all ease;
+		}
+
+		.img-fluid {
+			max-width: 100%;
+			height: auto;
+		}
+
+		.blog-section .post-entry .post-thumbnail {
+			display: block;
+			margin-bottom: 20px;
+		}
+
+		.blog-section .post-entry a {
+			text-decoration: none;
+			line-height: 1.5;
+		}
+
+		a {
+			text-decoration: none;
+			-webkit-transition: .3s all ease;
+			-o-transition: .3s all ease;
+			transition: .3s all ease;
+			color: #2f2f2f;
+			text-decoration: underline;
+		}
+
+		.blog-section .post-entry .post-content-entry {
+			padding-left: 15px;
+			padding-right: 15px;
+		}
+
+		.blog-section .post-entry .post-content-entry h3 {
+			font-size: 16px;
+			margin-bottom: 0;
+			font-weight: 600;
+			margin-bottom: 7px;
+		}
+
+		.blog-section .post-entry .post-content-entry .meta {
+			font-size: 14px;
+		}
+
+		@media (min-width: 1400px) {
+
+			.container,
+			.container-lg,
+			.container-md,
+			.container-sm,
+			.container-xl,
+			.container-xxl {
+				max-width: 1320px;
+			}
+		}
+
+		@media (min-width: 768px) {
+			.col-md-4 {
+				flex: 0 0 auto;
+				width: 33.33333333%;
+			}
+		}
+
+		img:hover {
+			transform: scale(0.8);
+			transition: transform 0.2s ease-in-out;
+			opacity: 0.7;
+			image-rendering: pixelated;
+		}
+		/* pagination position styling */
+        .pagination_section {
+            position: relative;
+        }
+         
+        /* pagination styling */
+        .pagination_section a {
+            color: black;
+            padding: 10px 18px;
+            text-decoration: none;
+        }
+         
+        /* pagination hover effect on non-active */
+        .pagination_section a:hover:not(.active) {
+            background-color: #031F3B;
+            color: white;
+        }
+         
+        /* pagination hover effect on active*/
+         
+        a:nth-child(5) {
+            background-color: green;
+            color: white;
+        }
+         
+        a:nth-child(1) {
+            font-weight: bold;
+        }
+         
+        a:nth-child(7) {
+            font-weight: bold;
+        }
+	</style>
+</head>
+
+<body>
+
+	<!-- Start Header/Navigation -->
+	<!-- <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
+
+		<div class="container">
+			<a class="navbar-brand" href="index.html">Furni<span>.</span></a>
+
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni"
+				aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarsFurni">
+				<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+					<li class="nav-item">
+						<a class="nav-link" href="index.html">Home</a>
+					</li>
+					<li><a class="nav-link" href="shop.html">Shop</a></li>
+					<li><a class="nav-link" href="about.html">About us</a></li>
+					<li><a class="nav-link" href="services.html">Services</a></li>
+					<li class="active"><a class="nav-link" href="blog.html">Blog</a></li>
+					<li><a class="nav-link" href="contact.html">Contact us</a></li>
+				</ul>
+
+				<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+					<li><a class="nav-link" href="#"><img src="images/user.svg"></a></li>
+					<li><a class="nav-link" href="cart.html"><img src="images/cart.svg"></a></li>
+				</ul>
+			</div>
+		</div>
+
+	</nav> -->
+	<!-- End Header/Navigation -->
+
+	<!-- Start Hero Section -->
+	<!-- <div class="hero">
+		<div class="container">
+			<div class="row justify-content-between">
+				<div class="col-lg-5">
+					<div class="intro-excerpt">
+						<h1>Blog</h1>
+						<p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
+							vulputate velit imperdiet dolor tempor tristique.</p>
+						<p><a href="" class="btn btn-secondary me-2">Shop Now</a><a href="#"
+								class="btn btn-white-outline">Explore</a></p>
+					</div>
+				</div>
+				<div class="col-lg-7">
+					<div class="hero-img-wrap">
+						<img src="images/couch.png" class="img-fluid">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+	<!-- End Hero Section -->
+	<section class="inner-banner py-5">
+        <div class="w3l-breadcrumb py-lg-5">
+            <div class="container pt-5 pb-sm-4 pb-2">
+                <h4 class="inner-text-title font-weight-bold pt-5">BLOG</h4>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active"><i class="fas fa-angle-right mx-2"></i>Blog</li>
                 </ul>
-            </nav>
-
-
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- banner slider -->
-<script>
-    const slides = document.querySelectorAll(".slide");
-    const nextButton = document.getElementById("next");
-    const prevButton = document.getElementById("prev");
-    const auto = true;
-    const intervalTime = 5000;
-    let slideInterval;
 
-    const nextSlide = () => {
-        const current = document.querySelector(".current");
-        current.classList.remove("current");
-        if (current.nextElementSibling) {
-            current.nextElementSibling.classList.add("current");
-        } else {
-            slides[0].classList.add("current");
-        }
-    };
 
-    const prevSlide = () => {
-        const current = document.querySelector(".current");
-        current.classList.remove("current");
-        if (current.previousElementSibling) {
-            current.previousElementSibling.classList.add("current");
-        } else {
-            slides[slides.length - 1].classList.add("current");
-        }
-    };
+	<!-- Start Blog Section -->
+	<div class="blog-section">
+		<div class="container">
 
-    nextButton.addEventListener("click", () => {
-        nextSlide();
-        if (auto) {
-            clearInterval(slideInterval);
-            slideInterval = setInterval(nextSlide, intervalTime);
-        }
-    });
-    prevButton.addEventListener("click", () => {
-        prevSlide();
-        if (auto) {
-            clearInterval(slideInterval);
-            slideInterval = setInterval(nextSlide, intervalTime);
-        }
-    });
+			<div class="rowblog">
 
-    if (auto) {
-        slideInterval = setInterval(nextSlide, intervalTime);
-    }
-</script>
-<!-- //banner slider -->
+                {% for post in posts %}
 
-<!-- video popup -->
-<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
-<script>
-    $(document).ready(function () {
-        $('.popup-with-zoom-anim').magnificPopup({
-            type: 'inline',
-            fixedContentPos: false,
-            fixedBgPos: true,
-            overflowY: 'auto',
-            closeBtnInside: true,
-            preloader: false,
-            midClick: true,
-            removalDelay: 300,
-            mainClass: 'my-mfp-zoom-in'
-        });
+				<div class="col-12 col-sm-6 col-md-4 mb-5">
+					<div class="post-entry">
+						<a href="{% url 'blog_detail' post.title %}" class="post-thumbnail"><img src="{% static '/images/blog/img1.jpg' %}" alt="Image"
+								class="img-fluid"></a>
+						<div class="post-content-entry">
+							<h3><a href="{% url 'blog_detail' post.title %}">{{ post.title }}</a></h3>
+							<div class="meta">
+								<span>by <a href="#">Kristin Watson</a></span> <span>on <a href="#">Dec 19,
+										2021</a></span>
+							</div>
+						</div>
+					</div>
+				</div>
 
-        $('.popup-with-move-anim').magnificPopup({
-            type: 'inline',
-            fixedContentPos: false,
-            fixedBgPos: true,
-            overflowY: 'auto',
-            closeBtnInside: true,
-            preloader: false,
-            midClick: true,
-            removalDelay: 300,
-            mainClass: 'my-mfp-slide-bottom'
-        });
-    });
-</script>
-<!-- //video popup -->
+                {% endfor %}
 
+				
+			</div>
+		</div>
+	</div>
+
+	<!-- End Blog Section -->
+
+
+	{% comment %} <script src="js/bootstrap.bundle.min.js"></script>
+	<script src="js/tiny-slider.js"></script>
+	<script src="js/custom.js"></script> {% endcomment %}
+
+
+</body>
+
+</html>
 {% endblock %}

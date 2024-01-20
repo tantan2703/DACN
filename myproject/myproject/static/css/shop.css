@@ -1,9 +1,8 @@
-body {
+body-shop {
     margin: 0;
-    font-family: Poppins;
 }
 
-.container {
+.container-shop {
     width: 900px;
     margin: auto;
     max-width: 90vw;
@@ -12,20 +11,34 @@ body {
     transition: transform .5s;
 }
 
-svg {
+svg.shop {
     width: 30px;
 }
 
-header {
+.header-cart {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 0;
 }
 
+/* Thêm CSS vào stylesheet của bạn */
 .icon-cart {
     position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
 }
+
+.icon-cart:hover {
+    /* Hiệu ứng khi di chuột vào */
+    transform: scale(1.1);
+}
+
+.icon-cart:active {
+    /* Hiệu ứng khi click */
+    transform: scale(0.9);
+}
+
 
 .icon-cart span {
     position: absolute;
@@ -41,7 +54,7 @@ header {
     right: -20px;
 }
 
-.title {
+.title-cart {
     font-size: xx-large;
 }
 
@@ -76,40 +89,58 @@ header {
     background-color: #f50537;
     color: #eee;
     border: none;
-    padding: 5px 10px;
+    padding: 10px 20px;
     margin-top: 10px;
     border-radius: 20px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
+
+.listProduct .item button:hover {
+    background-color: #eee;
+    color: #f50537;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.listProduct .item button:active {
+    transform: scale(0.9);
+}
+
 
 /* cart */
 .cartTab {
-    width: 400px;
+    width: 459px;
     background-color: #353432;
     color: #eee;
     position: fixed;
     top: 0;
-    right: -400px;
+    right: -459px;
     bottom: 0;
     display: grid;
     grid-template-rows: 70px 1fr 70px;
     transition: .5s;
+    z-index: 9999;
 }
 
-body.showCart .cartTab {
+.body-shop.showCart .cartTab {
     right: 0;
 }
 
-body.showCart .container {
+.body-shop.showCart .container-shop {
     transform: translateX(-250px);
 }
 
 .cartTab h1 {
+    color: #eee;
     padding: 20px;
     margin: 0;
     font-weight: 300;
 }
 
-.cartTab .btn {
+.cartTab .btn-shop {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 }

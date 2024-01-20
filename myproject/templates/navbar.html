@@ -32,7 +32,7 @@
                                 <a href="#linkedin"><span class="fab fa-linkedin-in"></span></a>
                     </li>
                 </ul>
-            </div>
+            </div> 
         </div>
     </div>
 </section>
@@ -41,7 +41,7 @@
 <header id="site-header" class="fixed-top">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{% url 'home' %}">
                 <i class="fas fa-music me-1"></i>Musical
             </a>
             <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
@@ -53,17 +53,18 @@
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'concert' %}">Shows</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blog' %}">Blogs</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="about.html">About Us</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Shows</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Buy tickets</a>
-                    </li>
+                    
                     
                     {% if user.is_authenticated %}
                     <li class="nav-item">
@@ -77,8 +78,8 @@
                 
 
                 </ul>
-                <form action="#error" method="GET" class="d-flex search-header ms-lg-2">
-                    <input class="form-control" type="search" placeholder="Enter Keyword..." aria-label="Search"
+                <form action="{% url 'search' %}" class="d-flex search-header ms-lg-2">
+                    <input class="form-control" type="search"  name="keywords" placeholder="Enter Keyword..." aria-label="Search"
                         required>
                     <button class="btn btn-style" type="submit"><i class="fas fa-search"></i></button>
                 </form>
