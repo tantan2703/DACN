@@ -1,34 +1,180 @@
-
+{% extends 'base.html' %}
 {% load static %}
+{% block title %}Hello{% endblock %}
+{% block content %}
 
 
-    <link rel="stylesheet" href="{% static 'css/shop.css' %}">
-    
-<div class="body-shop">
-    <div class="container-shop">
-        <div class="header-cart">
-            <div class="title-cart">PRODUCT LIST</div>
-            <div class="icon-cart">
-                <svg class="shop" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0h8m-8 0-1-4m9 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-9-4h10l2-7H3m2 7L3 4m0 0-.792-3H1" />
-                </svg>
-                <span>0</span>
+<link rel="stylesheet" href="{% static 'css/shop.css' %}">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<section class="py-5">
+    <div class="body-shop py-3">
+        <!-- shopping_cart/product_list.html -->
+        <div class="container-shop">
+            <div class="header-cart">
+                <div class="title-cart">PRODUCT LIST</div>
+                <div class="icon-cart">
+                    <svg class="shop" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0h8m-8 0-1-4m9 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-9-4h10l2-7H3m2 7L3 4m0 0-.792-3H1" />
+                    </svg>
+                    <span id="cart-count">{{ total_products_in_cart }}</span>
+                </div>
+            </div>
+            <div class="listProduct">
+                {% for product in products %}
+                <div data-id="{{ product.id }}" class="item">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% endif %}
+                    <h2>{{ product.name }}</h2>
+                    <div class="price">${{ product.price }}</div>
+                    <button class="addCart" data-product-id="{{ product.id }}">Add To Cart</button>
+                </div>
+                {% endfor %}
             </div>
         </div>
-        </header>
-        <div class="listProduct">
+        
 
+        <script>
+            var $j = jQuery.noConflict();
+
+            $j(document).ready(function() {
+                $j('.addCart').on('click', function() {
+                    var product_id = $j(this).data('product-id');
+
+                    $j.ajax({
+                        type: 'GET',
+                        url: '/shop/add_to_cart/' + product_id + '/',
+                        success: function(response) {
+                            // Cập nhật số sản phẩm trên trang
+                            $j('#cart-count').text(response.total_products_in_cart);
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+        <div class="cartTab">
+            <h1>Shopping Cart</h1>
+            <div class="listCart">
+                {% for cart_item in cart_items %}
+                  <div class="item" data-id="{{ cart_item.product.id }}">
+                    <div class="image">
+                      {% if cart_item.product.image %}
+                        <img src="{{ cart_item.product.image.url }}" alt="{{ cart_item.product.name }}">
+                      {% endif %}
+                    </div>
+                    <div class="name">
+                      {{ cart_item.product.name }}
+                    </div>
+                    <div class="totalPrice">${{ cart_item.subtotal}}</div>
+                    <div class="quantity">
+                      <span class="minus" data-item-id="{{ cart_item.id }}">&lt;</span>
+                      <span>{{ cart_item.quantity }}</span>
+                      <span class="plus" data-item-id="{{ cart_item.id }}">&gt;</span>
+                    </div>
+                  </div>
+                {% endfor %}
+            </div>
+            {% for cart_item in cart_items %}
+            <div class="totalPriceInCart">
+                Total Price in Cart: ${{ total_price_in_cart}}
+            </div>
+            {% endfor %}
+            <div class="btn-shop">
+                <button class="close">CLOSE</button>
+                <button class="">CHECK OUT</button>
+            </div>
         </div>
     </div>
-    <div class="cartTab">
-        <h1>Shopping Cart</h1>
-        <div class="listCart">
+</section>
+<script>
+    var $j = jQuery.noConflict();
 
-        </div>
-        <div class="btn">
-            <button class="close">CLOSE</button>
-            <button class="checkOut">Check Out</button>
-        </div>
-    </div>
-</div>
+    $j(document).ready(function() {
+        // Bắt sự kiện khi click vào .icon-cart
+        $j('.icon-cart').on('click', function() {
+            try {
+                // Thêm hoặc loại bỏ class 'showCart' cho div .body-shop
+                $j('.body-shop').toggleClass('showCart');
+            } catch (error) {
+                // In lỗi ra console nếu có
+                console.error('Error:', error);
+            }
+        });
+
+        // Bắt sự kiện khi click vào nút CLOSE
+        $j('.btn-shop .close').on('click', function() {
+            // Loại bỏ class 'showCart' khỏi div .body-shop
+            $j('.body-shop').removeClass('showCart');
+        });
+    });
+</script>
+
+<!-- Thêm vào cuối trang HTML -->
+<script>
+    var $j = jQuery.noConflict();
+
+    $j(document).ready(function() {
+        // Bắt sự kiện khi nút "minus" được click
+        $j('.quantity .minus').on('click', function() {
+            var itemId = $j(this).data('item-id');
+            updateCartItemQuantity(itemId, 'decrease');
+        });
+
+        // Bắt sự kiện khi nút "plus" được click
+        $j('.quantity .plus').on('click', function() {
+            var itemId = $j(this).data('item-id');
+            updateCartItemQuantity(itemId, 'increase');
+        });
+
+        function updateCartItemQuantity(itemId, action) {
+            // Thực hiện AJAX để cập nhật số lượng sản phẩm trong giỏ hàng
+            $j.ajax({
+                type: 'POST',
+                url: '/shop/update_cart_item_quantity/' + itemId + '/?action=' + action,
+                success: function(response) {
+                    // Cập nhật số lượng hiển thị trên giao diện
+                    console.log('Updating item with ID:', itemId);
+
+                    // Sử dụng product_id để tìm phần tử DOM đúng
+                    var selectedItem = $j('.listCart .item[data-id="' + response.product_id + '"]');
+                    console.log('Selected item:', selectedItem);
+
+                    // Sử dụng .find() để tìm các phần tử con trong selectedItem
+                    var quantityElement = selectedItem.find('.quantity span:eq(1)');
+                    console.log('Quantity element:', quantityElement);
+
+                    // Cập nhật các giá trị của quantity, total_price_in_cart và subtotal
+                    quantityElement.text(response.quantity);
+                    $j('.totalPriceInCart').text('Total Price in Cart: $' + response.total_price_in_cart);
+                    selectedItem.find('.totalPrice').text('$' + response.subtotal);
+
+                    // Kiểm tra nếu sản phẩm đã bị xóa, thì xóa khỏi DOM
+                    if (response.deleted) {
+                        selectedItem.remove();
+                    }
+
+                    console.log('Update successful!');
+                },
+                error: function(error) {
+                    console.error('Error updating cart item quantity:', error);
+                }
+            });
+        }
+    });
+</script>
+
+
+<script>
+    var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    $j.ajaxSetup({
+        headers: { "X-CSRFToken": csrftoken }
+    });
+</script>
+
+{% endblock %}
