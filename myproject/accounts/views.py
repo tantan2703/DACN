@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect,  HttpResponseRedirect,get_object_or_404
-from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm 
 from django.contrib.auth.models import User, auth
 from .models import *
 from .forms import *
@@ -15,6 +15,7 @@ from .decorators import *
 from bootstrap_modal_forms.generic import BSModalLoginView,BSModalCreateView
 from .forms import CustomAuthenticationForm
 from .forms import CustomUserCreationForm
+from .forms import UserUpdateForm, ProfileUpdateForm
 
 # class SignUpView(BSModalCreateView):
 #     form_class = CustomUserCreationForm
@@ -179,19 +180,26 @@ def logoutUser(request):
 
 
 
-@login_required(login_url='login' )
+@login_required(login_url='login')
 def profile(request):
-    Profile = request.user.Profile
-    form = ProfileForm(instance=Profile)
     if request.method == "POST":
-        form = ProfileForm(request.POST, request.FILES,instance=Profile)
-        if form.is_valid():
-            form.save()
-            #return redirect('/listings')
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.Profile)
+
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile')
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.Profile)
+
     context = {
-        'form':form
+        'u_form': u_form,
+        'p_form': p_form,
     }
-    return render(request,'accounts/profile.html',context)
+    return render(request,'accounts/profile.html', context)
 
 #@allowed_users(allowed_roles=['customer'])
 @login_required(login_url='login')
@@ -208,5 +216,16 @@ def profile_setting(request):
     }
     return render(request,'accounts/profile_setting.html',context)
 
-
+#Change_Password
+def Change_Password(request):
+    if request.method == "POST":
+         fm=PasswordChangeForm(user=request.user,data=request.POST)
+         if fm.is_valid():
+            fm.save()
+            update_session_auth_hash(request,fm.user)
+            messages.success(request,'Your password has been changed succesfully.....')
+            return redirect('home')
+    else:
+        fm=PasswordChangeForm(user=request.user)
+    return render (request,'accounts/Change_Password.html',{'fm':fm})
 

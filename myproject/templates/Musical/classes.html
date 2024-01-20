@@ -67,16 +67,16 @@
                 <div class="collapse navbar-collapse" id="navbarScroll">
                     <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                            <a class="nav-link" aria-current="page" href="{%url 'home' %}">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="about.html">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="classes.html">Buy Tickets</a>
+                            <a class="nav-link active" href="{% url 'classes' %}">Shows</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
+                            <a class="nav-link" href="{% url 'buyticket' %}">Buy Tickets</a>
                         </li>
                     </ul>
                     <form action="#error" method="GET" class="d-flex search-header ms-lg-2">
@@ -187,7 +187,7 @@
                                     <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
                                         </a></li>
                                 </ul>
-                                <a class="btn btn-style" href="contact.html">Đặt vé</a>
+                                <a class="btn btn-style" href="{% url 'buyticket'%}">Đặt vé</a>
                             </div>
                         </div>
                     </div>
@@ -221,7 +221,7 @@
                                     <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
                                         </a></li>
                                 </ul>
-                                <a class="btn btn-style" href="contact.html">Đặt vé</a>
+                                <a class="btn btn-style" href="{% url 'buyticket'%}">Đặt vé</a>
                             </div>
                         </div>
                     </div>
@@ -255,7 +255,7 @@
                                     <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
                                         </a></li>
                                 </ul>
-                                <a class="btn btn-style" href="contact.html">Đặt vé</a>
+                                <a class="btn btn-style" href="{% url 'buyticket'%}">Đặt vé</a>
                             </div>
                         </div>
                     </div>
@@ -289,7 +289,7 @@
                                     <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
                                         </a></li>
                                 </ul>
-                                <a class="btn btn-style" href="contact.html">Đặt vé</a>
+                                <a class="btn btn-style" href="{% url 'buyticket'%}">Đặt vé</a>
                             </div>
                         </div>
                     </div>
@@ -323,7 +323,7 @@
                                     <li><a href="#rate"><i class="fas fa-star" aria-hidden="true"></i>
                                         </a></li>
                                 </ul>
-                                <a class="btn btn-style" href="contact.html">Đặt vé</a>
+                                <a class="btn btn-style" href="{% url 'buyticket'%}">Đặt vé</a>
                             </div>
                         </div>
                     </div>
