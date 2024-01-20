@@ -5,7 +5,22 @@ from .models import Comment, Post
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+def blog(request):
+    context={
+    }
+    return render(request,'Musical/blog.html',context)
 
+def blog_list(request):
+    posts=Post.objects.all()
+    paginator = Paginator(posts,6)
+    page = request.GET.get('page')
+    paged_listings = paginator.get_page(page)
+    context={
+        'posts':paged_listings,
+       
+    }
+    return render(request, "blog/blog.html",context)
 
 def blog_detail(request, post_title):
     post = get_object_or_404(Post, title=post_title)
