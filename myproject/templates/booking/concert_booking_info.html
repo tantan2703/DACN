@@ -22,7 +22,7 @@
             <h3 class="title-style text-center mb-5">Thông tin đặt vé</h3>
             <div class="row contact-block">
                 <div class="col-md-7 contact-right">
-                    <form action="{% url 'payment' name=concert.name %}" method="POST" class="signin-form">
+                    <form action="{% url 'momo_payment' name=concert.name %}" method="POST" class="signin-form">
                         {% csrf_token %}
                         <div class="input-grids">
                             <!-- Thêm trường họ và tên -->
@@ -43,7 +43,7 @@
                     
                             <!-- Hiển thị thông tin email, tên concert và tổng số ghế -->
                             <input type="text" name="user_email" id="user-email" placeholder="Email"
-                                class="contact-input" required="" value="{{ user_email }}" readonly />
+                                class="contact-input" required="" value="{{ user_email }}"/>
                             <input type="text" name="concert_name" id="concert-name" placeholder="Tên chương trình"
                                 class="contact-input" required="" value="{{ concert.name }}" readonly />
                             <input type="text" name="total_seats" id="total-seats" placeholder="Tổng số ghế"
